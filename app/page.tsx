@@ -32,7 +32,7 @@ export default function Home() {
           <a className="button-primary" href={etsy.shop} target="_blank" rel="noreferrer">Shop gifts <ArrowRight size={18} /></a>
           <div className="hero-links"><Link href="#couples">For Couples</Link><i /><Link href="#friends">For Friends</Link><i /><Link href="#invites">For Invites</Link></div>
         </div>
-        <div className="hero-gallery" aria-label="A gallery of personalized PassionFlow gifts">
+        <div className="hero-gallery" aria-label="A gallery of personalized Passion Flow gifts">
           <div className="hero-grid">
             {heroGrid.map((tile, index) => tile === 'message'
               ? <div className="hero-grid-message" key="message"><span>This could be</span><em>your gift.</em></div>
@@ -85,7 +85,7 @@ export default function Home() {
       </section>
 
       <section className="about" id="about">
-        <div className="about-copy reveal"><span className="eyebrow">WHY CUSTOMERS CHOOSE US</span><h2><span className="headline-line">Made for the moments</span><em><span className="headline-line">you don’t want to forget.</span></em></h2><p>PassionFlow Studio turns the photos, stories, and little details you already love into meaningful gifts that feel completely personal.</p><a className="button-primary about-button" href={etsy.shop} target="_blank" rel="noreferrer">See the whole shop <ArrowRight size={17} /></a></div>
+        <div className="about-copy reveal"><span className="eyebrow">WHY CUSTOMERS CHOOSE US</span><h2><span className="headline-line">Made for the moments</span><em><span className="headline-line">you don’t want to forget.</span></em></h2><p>Passion Flow Studio turns the photos, stories, and little details you already love into meaningful gifts that feel completely personal.</p><a className="button-primary about-button" href={etsy.shop} target="_blank" rel="noreferrer">See the whole shop <ArrowRight size={17} /></a></div>
         <div className="trust-grid">
           {trustPoints.map(({ icon: Icon, title }) => <div key={title}><span className="trust-icon"><Icon /></span><span className="trust-copy"><h3>{title}</h3></span></div>)}
         </div>

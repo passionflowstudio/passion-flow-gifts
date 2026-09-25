@@ -7,7 +7,7 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://passionflows
 export const ga4Id = process.env.NEXT_PUBLIC_GA4_ID ?? 'G-0YKJ2V5BFG';
 
 export const brand = {
-  name: 'PassionFlow Studio',
+  name: 'Passion Flow Studio',
   tagline: 'Meaningful gifts made from your memories',
   description: 'Personalized digital gifts and invitations made from the photos, stories, and little moments you love.',
   email: 'passionflow.studio@gmail.com',

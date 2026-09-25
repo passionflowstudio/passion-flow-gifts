@@ -68,7 +68,7 @@ export function ProductReviews({ summary }: { summary: ReviewSummary }) {
             </div>
             {review.response && (
               <div className="review-response">
-                <strong>Response from PassionFlow Studio</strong>
+                <strong>Response from Passion Flow Studio</strong>
                 <p>{review.response}</p>
               </div>
             )}
