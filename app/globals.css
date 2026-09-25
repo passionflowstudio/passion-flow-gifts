@@ -328,13 +328,13 @@ html:has(.cart-drawer[open]){overflow:hidden}
 .product-description p{margin:0 0 14px}
 .product-description ul,.product-description ol{margin:0 0 18px;padding-left:20px}
 .product-description li{margin-bottom:6px}
-.product-description>p:first-child strong{font-family:var(--font-playfair),Georgia,serif;font-size:22px;font-weight:500;line-height:1.2;color:var(--espresso)}
+.product-description>p:first-child strong{font-family:var(--font-playfair),Georgia,serif;font-size:24px;font-weight:500;line-height:1.15;letter-spacing:-.045em;color:var(--espresso)}
 
 .gallery-badge{position:absolute;top:-14px;left:-14px;z-index:3;display:inline-flex;align-items:center;gap:7px;padding:9px 16px 9px 13px;border-radius:999px;background:var(--brand-gradient);color:#fff;font-size:14px;font-weight:600;letter-spacing:.01em;box-shadow:0 10px 22px rgba(115,52,59,.28)}
 
 /* ---------- Reviews ---------- */
 .reviews{display:grid;gap:22px}
-.reviews-head h2{margin:0 0 6px;font-size:clamp(28px,2.6vw,36px);letter-spacing:-.03em}
+.reviews-head h2{margin:0 0 6px;font-size:clamp(28px,2.6vw,36px);letter-spacing:-.045em}
 .reviews-source{display:flex;align-items:center;gap:6px;margin:0;color:var(--muted-foreground);font-size:13px}
 .reviews-source svg{color:var(--wine)}
 .reviews-summary{display:flex;flex-wrap:wrap;align-items:center;gap:22px 40px;padding:24px 26px;border:1px solid rgba(115,52,59,.12);border-radius:16px;background:var(--paper);box-shadow:0 14px 36px rgba(71,43,36,.06)}
