@@ -15,8 +15,8 @@ type Props = {
 
 const features = [
   { icon: Download, label: 'Instant Digital Download' },
-  { icon: Pencil, label: 'Beginner-Friendly Canva Editing' },
-  { icon: CirclePlay, label: 'Includes Step-by-Step Video Tutorial' },
+  { icon: Pencil, label: 'Edit with Canva Free' },
+  { icon: CirclePlay, label: 'Includes Video Tutorial' },
 ];
 
 function PriceBlock({ price, compareAtPrice }: { price: Money; compareAtPrice: Money | null }) {
