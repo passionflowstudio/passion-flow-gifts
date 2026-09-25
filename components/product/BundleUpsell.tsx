@@ -28,9 +28,11 @@ export async function BundleUpsell({ bundleSlug, current }: Props) {
     getProduct(bundleEntry.handle),
     ...bundleEntry.includes.map(slug => {
       const entry = findBySlug(slug);
-      return entry ? getProduct(entry.handle).then(product => ({ slug, name: entry.name, product })) : Promise.resolve({ slug, name: slug, product: null });
+      return entry
+        ? getProduct(entry.handle).then(product => ({ slug, name: entry.name, fallbackImage: entry.fallbackImage, product }))
+        : Promise.resolve({ slug, name: slug, fallbackImage: undefined, product: null });
     }),
-  ]) as [Product | null, ...{ slug: string; name: string; product: Product | null }[]];
+  ]) as [Product | null, ...{ slug: string; name: string; fallbackImage?: string; product: Product | null }[]];
 
   const bundleVariant = bundle && firstVariant(bundle);
   if (!bundle || !bundleVariant || !bundle.availableForSale) return null;
@@ -58,9 +60,9 @@ export async function BundleUpsell({ bundleSlug, current }: Props) {
       </div>
 
       <ol className="bundle-items">
-        {parts.map(({ slug, name, product }, index) => {
+        {parts.map(({ slug, name, fallbackImage, product }, index) => {
           const variant = product && firstVariant(product);
-          const image = product?.featuredImage;
+          const image = product?.featuredImage ?? (fallbackImage ? { url: fallbackImage, altText: name } : null);
           const isCurrent = current?.slug === slug;
           const tile = (
             <>

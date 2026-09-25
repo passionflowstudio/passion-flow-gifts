@@ -1,11 +1,17 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
+import { AllAccessTeaser } from '@/components/allaccess/AllAccessTeaser';
+import { BundleUpsell } from '@/components/product/BundleUpsell';
+import { FinalCta } from '@/components/product/FinalCta';
+import { ProductFaq } from '@/components/product/ProductFaq';
 import { ProductGallery } from '@/components/product/ProductGallery';
+import { StickyBuyBar } from '@/components/product/StickyBuyBar';
 import { ProductPurchase } from '@/components/product/ProductPurchase';
 import { ProductReviews } from '@/components/product/ProductReviews';
 import { Stars } from '@/components/product/Stars';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
 import { findByHandle, findBySlug } from '@/lib/catalog';
+import { formatMoney } from '@/lib/money';
 import { productContent } from '@/lib/product-content';
 import { getProduct } from '@/lib/shopify/products';
 import { brand, siteUrl } from '@/lib/site-config';
@@ -79,7 +85,10 @@ export default async function ProductPage({ params }: Props) {
     handle: product.handle,
     title: product.title,
   };
-  const images = product.images.length ? product.images : product.featuredImage ? [product.featuredImage] : [];
+  const available = product.availableForSale && variant.availableForSale;
+  const priceLabel = formatMoney(variant.price);
+  const thumb = product.featuredImage?.url;
+    const images = product.images.length ? product.images : product.featuredImage ? [product.featuredImage] : [];
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -114,7 +123,7 @@ export default async function ProductPage({ params }: Props) {
           </a>
           <ProductPurchase
             item={item}
-            available={product.availableForSale && variant.availableForSale}
+            available={available}
             price={variant.price}
             compareAtPrice={variant.compareAtPrice}
           />
@@ -126,6 +135,17 @@ export default async function ProductPage({ params }: Props) {
           </div>
         )}
       </section>
+
+      <div className="product-sections">
+        {entry.bundle && (
+          <BundleUpsell bundleSlug={entry.bundle} current={{ slug: entry.slug, variantId: variant.id, price: variant.price }} />
+        )}
+        {entry.kind === 'bundle' && <BundleUpsell bundleSlug={entry.slug} />}
+        <AllAccessTeaser fromProduct={entry.slug} />
+        {extra.faqs && <ProductFaq faqs={extra.faqs} />}
+        <FinalCta item={item} headline={`Make your ${entry.name.toLowerCase()} today.`} priceLabel={priceLabel} image={thumb} available={available} />
+      </div>
+      <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} />
     </main>
   );
 }

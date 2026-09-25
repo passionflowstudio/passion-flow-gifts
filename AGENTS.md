@@ -202,21 +202,33 @@ Done and verified in a browser (desktop and 375px mobile):
 - Matchbook page: gallery, video, badge, price with sale, byline, features,
   15 Etsy reviews.
 
-In progress (compiles, **not yet wired into pages, and has no CSS yet**):
-- `BundleUpsell` + `BundleUpsellActions`: 4 gift tiles with live prices;
-  "Get the complete bundle", or "Upgrade for $X more" (an in-place swap) when
-  the single product is already in the cart.
-- `AllAccessTeaser`, `AllAccessJoin`, `AllAccessLink`, `getSubscriptionOffer`
-  (returns null until the product exists and has a selling plan).
-- Cart lines support `sellingPlanId`; the drawer shows the plan name.
-- FAQ content exists in `lib/product-content.ts`, but there is no FAQ
-  component yet.
-- Bundle reviews: Sydney's review plus the matchbook reviews, each labeled
-  with its product.
+Also done (2026-09-25, verified desktop + 375px):
+- Product page sections below the hero: BundleUpsell (4 tiles with live
+  prices, "Get the complete bundle", or "Upgrade for $X more" as an in-place
+  swap), AllAccessTeaser, FAQ accordion (`ProductFaq`), `FinalCta`, and
+  `StickyBuyBar` (phone only; appears after the purchase buttons scroll away).
+- The upgrade flow is tested: the matchbook line becomes the bundle line
+  ($24.99); events fire in order: upsell_clicked:upgrade →
+  product_removed_from_cart → product_added_to_cart:bundle_upgrade.
+- `/all-access` page: hero, perks, price per year and per month, steps, a
+  comparison with live prices, FAQ, and AllAccessJoin (buyNow with
+  sellingPlanId). If there's no offer, it shows "opening soon" plus signup.
+- **Local preview:** `ALL_ACCESS_PREVIEW=1` in `.env.local` (gitignored)
+  makes `getSubscriptionOffer` return a non-purchasable $49 preview offer
+  with a "Preview" tag. **Never set it on Netlify.**
+- The bundle's Newspaper tile uses `fallbackImage` from the catalog while
+  the product is a draft; the savings line is hidden until all 4 gifts are
+  priced live.
+
+Known gap: if the bundle is already in the cart, the single-product buttons
+(purchase, sticky bar, final CTA) still offer "Add to cart" for the matchbook,
+which is included in the bundle. Show "Included in your bundle" instead.
 
 ## 9. Next steps (in order)
 
-1. On `app/products/[slug]/page.tsx`, below the hero, render in this order:
+1. DONE: the sections below are wired in (kept for reference). Remaining:
+   the "included in your bundle" gap above, and a bundle-page review pass.
+   Order on `app/products/[slug]/page.tsx`, below the hero:
    - `<BundleUpsell bundleSlug={entry.bundle} current={{ slug, variantId, price }} />`
      for products that have a `bundle`.
    - `<BundleUpsell bundleSlug={entry.slug} />` on bundle pages (the "What's
@@ -229,7 +241,8 @@ In progress (compiles, **not yet wired into pages, and has no CSS yet**):
 
    Style every new section with the existing tokens and gradient. Test at
    375px and on desktop.
-2. Build `/all-access` (`app/all-access/page.tsx`):
+2. DONE (preview until the Shopify product and plan exist). Original spec,
+   `/all-access` (`app/all-access/page.tsx`):
    - Hero: "Never run out of meaningful gift ideas." Price per year from the
      selling plan, plus "about $X/month".
    - Perks, how it works, and a comparison (single $11.99 / bundle $24.99 /

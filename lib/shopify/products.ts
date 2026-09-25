@@ -56,10 +56,19 @@ export async function getProducts(handles: string[]): Promise<Record<string, Pro
 export type SubscriptionPlan = { id: string; name: string; price: Money };
 
 export type SubscriptionOffer = {
-  product: Product;
+  product: Product | null;
   variantId: string;
   plans: SubscriptionPlan[];
+  // Local design preview only (ALL_ACCESS_PREVIEW=1 in .env.local): not purchasable.
+  preview?: boolean;
 };
+
+// Local-only preview so the All Access design can be reviewed before the
+// Shopify product and plan exist. Never set this env var on Netlify.
+const previewOffer = (): SubscriptionOffer | null =>
+  process.env.ALL_ACCESS_PREVIEW === '1'
+    ? { product: null, variantId: '', preview: true, plans: [{ id: '', name: 'Yearly (preview)', price: { amount: '49.00', currencyCode: 'USD' } }] }
+    : null;
 
 type RawAllocations = {
   product: {
@@ -78,7 +87,7 @@ type RawAllocations = {
 // actually be bought as a subscription.
 export async function getSubscriptionOffer(handle: string): Promise<SubscriptionOffer | null> {
   const product = await getProduct(handle);
-  if (!product?.availableForSale) return null;
+  if (!product?.availableForSale) return previewOffer();
   const data = await storefrontFetch<RawAllocations>(
     `query Plans($handle: String!) {
       product(handle: $handle) {
@@ -100,6 +109,6 @@ export async function getSubscriptionOffer(handle: string): Promise<Subscription
     name: allocation.sellingPlan.name,
     price: allocation.priceAdjustments[0]?.price ?? product.priceRange.minVariantPrice,
   }));
-  if (!variant || plans.length === 0) return null;
+  if (!variant || plans.length === 0) return previewOffer();
   return { product, variantId: variant.id, plans };
 }

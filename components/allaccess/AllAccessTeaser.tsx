@@ -18,7 +18,7 @@ export async function AllAccessTeaser({ fromProduct }: { fromProduct: string }) 
     <section className="aa-teaser" aria-labelledby="aa-teaser-title">
       <UpsellViewTracker offer="all_access" fromProduct={fromProduct} />
       <div className="aa-teaser-copy">
-        <span className="eyebrow">PASSION FLOW MOMENTS · ALL ACCESS</span>
+        <span className="eyebrow">PASSION FLOW MOMENTS · ALL ACCESS{offer.preview && <span className="aa-preview-tag">Preview</span>}</span>
         <h2 id="aa-teaser-title">Never run out of <em>meaningful gift ideas.</em></h2>
         <p>Get every Passion Flow gift template for a whole year: couples, birthdays, best friends and every new release.</p>
         <ul>{allAccessPerks.slice(0, 3).map(perk => <li key={perk}><Check size={15} /> {perk}</li>)}</ul>
