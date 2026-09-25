@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = ".next"
+  # Only build production (main). Branch deploys and deploy previews are
+  # skipped to save build credits; preview locally with `npm run build && npm start`.
+  ignore = "test \"$CONTEXT\" != \"production\""
 
 [build.environment]
   NODE_VERSION = "22"
