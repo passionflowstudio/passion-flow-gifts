@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductPurchase } from '@/components/product/ProductPurchase';
 import { ProductReviews } from '@/components/product/ProductReviews';
 import { Stars } from '@/components/product/Stars';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
-import { findBySlug } from '@/lib/catalog';
+import { findByHandle, findBySlug } from '@/lib/catalog';
 import { productContent } from '@/lib/product-content';
 import { getProduct } from '@/lib/shopify/products';
 import { brand, siteUrl } from '@/lib/site-config';
@@ -57,7 +57,13 @@ function ProductTitle({ title }: { title: string }) {
 }
 
 export default async function ProductPage({ params }: Props) {
-  const data = await load((await params).slug);
+  const { slug } = await params;
+  // Shopify-style URLs (/products/<shopify-handle>, e.g. from the Online Store
+  // redirect or old links) forward to the short URL.
+  const byHandle = !findBySlug(slug) && findByHandle(slug);
+  if (byHandle) permanentRedirect(`/products/${byHandle.slug}`);
+
+  const data = await load(slug);
   if (!data) notFound();
   const { product, entry } = data;
 
