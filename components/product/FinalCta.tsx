@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { useCart, type PurchasableItem } from '@/components/cart/CartProvider';
 
-type Props = { item: PurchasableItem; headline: string; priceLabel: string; image?: string; available: boolean; bundleVariantId?: string };
+type Props = { item: PurchasableItem; headline: ReactNode; priceLabel: string; image?: string; available: boolean; bundleVariantId?: string };
 
 // Closing call to action at the bottom of the product page.
 export function FinalCta({ item, headline, priceLabel, image, available, bundleVariantId }: Props) {

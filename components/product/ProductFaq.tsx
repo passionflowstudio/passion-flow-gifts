@@ -1,8 +1,9 @@
 import { Plus } from 'lucide-react';
+import type { ReactNode } from 'react';
 import type { Faq } from '@/lib/product-content';
 
 // Native <details> accordion: accessible and works without JavaScript.
-export function ProductFaq({ faqs, title = 'Questions, answered' }: { faqs: Faq[]; title?: string }) {
+export function ProductFaq({ faqs, title = <>Questions? <em>We’ve got you.</em></> }: { faqs: Faq[]; title?: ReactNode }) {
   if (!faqs.length) return null;
   return (
     <section className="faq" aria-labelledby="faq-title">

@@ -146,6 +146,16 @@ Non-negotiable engineering rules (all tested):
   line after ":" in wine italic, each line forced onto one line and sized
   with container query units.
 - Body text: DM Sans.
+- **Heading rule (owner, 2026-09-25): every heading follows the hero pattern.**
+  - Main words in espresso, then a key phrase in `<em>` on its own line in
+    wine italic.
+  - The italic phrase is at least 2 words, so no single-word line.
+  - Balanced line breaks (`text-wrap: balance` on h1–h3) and no orphans at
+    375px.
+  - Product titles use "Main: Subtitle". Description hooks mark the italic
+    phrase with `<em>` in Shopify.
+  - To check: collect each heading's words by line (Range rects) at 375px
+    and look for any one-word line.
 - Mobile first. Check 375px width, and that nothing scrolls sideways.
 - Product page elements the owner asked for: a Bestseller badge on the
   gallery; eyebrow "MEANINGFUL GIFTS MADE FROM YOUR MEMORIES"; "Passion Flow

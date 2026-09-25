@@ -98,7 +98,7 @@ export default async function AllAccessPage() {
         </section>
       )}
 
-      <div className="aa-faq"><ProductFaq faqs={faqs} title="All Access, answered" /></div>
+      <div className="aa-faq"><ProductFaq faqs={faqs} title={<>Before you <em>join All Access.</em></>} /></div>
     </main>
   );
 }

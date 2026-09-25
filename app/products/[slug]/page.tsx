@@ -193,7 +193,7 @@ export default async function ProductPage({ params }: Props) {
         {entry.kind === 'bundle' && <BundleUpsell bundleSlug={entry.slug} />}
         <AllAccessTeaser fromProduct={entry.slug} />
         {extra.faqs && <ProductFaq faqs={extra.faqs} />}
-        <FinalCta item={item} headline={`Make your ${entry.name.toLowerCase()} today.`} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
+        <FinalCta item={item} headline={<>Make your {entry.name.toLowerCase()} <em>in minutes.</em></>} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
       </div>
       <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
     </main>
