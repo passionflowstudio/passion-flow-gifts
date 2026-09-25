@@ -256,6 +256,19 @@ Shopify stores): the purchase box shows two option cards above Add to cart.
   20×30 (posters) and 6×6, 8×8, 12×12 (photo book). The Shopify copy uses
   the image sizes; confirm with the owner.
 
+Product page section order (owner, 2026-09-25):
+1. Hero: gallery and reviews on the left; purchase column with the offer
+   picker on the right.
+2. BundleUpsell.
+3. AllAccessTeaser: transparent, text left, and a full-height 3×3 `GiftGrid`
+   right with a white center tile ("This could be *all your gifts.*").
+   Stacks with the grid first below 1024px.
+4. FAQ ("Questions? *We've got you.*").
+
+There's no final CTA box; the sticky buy bar covers phones.
+"Reviews for *this gift*" stays on one line (`.heading-inline`).
+**Responsive rule:** verify every UI change at 375, 768, 1024 and 1280px.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:

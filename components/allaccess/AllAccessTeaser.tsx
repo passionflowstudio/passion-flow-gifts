@@ -25,7 +25,7 @@ export async function AllAccessTeaser({ fromProduct }: { fromProduct: string }) 
         <p className="aa-teaser-price">
           <strong>{formatMoney(plan.price)}</strong> / year <span>· about {perMonth(plan.price)} a month</span>
         </p>
-        <AllAccessLink fromProduct={fromProduct} className="aa-teaser-cta">
+        <AllAccessLink fromProduct={fromProduct} className="button-primary aa-teaser-cta">
           Explore All Access <ArrowRight size={16} />
         </AllAccessLink>
       </div>

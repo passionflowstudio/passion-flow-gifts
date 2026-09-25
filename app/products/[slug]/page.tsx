@@ -190,9 +190,9 @@ export default async function ProductPage({ params }: Props) {
           <BundleUpsell bundleSlug={entry.bundle} current={{ slug: entry.slug, variantId: variant.id, price: variant.price }} />
         )}
         {entry.kind === 'bundle' && <BundleUpsell bundleSlug={entry.slug} />}
-        {extra.faqs && <ProductFaq faqs={extra.faqs} />}
-        {/* Closing pitch: All Access after the product and bundle. */}
+        {/* All Access after the product and bundle, then the FAQ. */}
         <AllAccessTeaser fromProduct={entry.slug} />
+        {extra.faqs && <ProductFaq faqs={extra.faqs} />}
       </div>
       <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
     </main>
