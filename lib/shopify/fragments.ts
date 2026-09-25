@@ -12,7 +12,16 @@ export const PRODUCT_FRAGMENT = /* GraphQL */ `
     tags
     seo { title description }
     featuredImage { ${IMAGE} }
-    images(first: 12) { nodes { ${IMAGE} } }
+    images(first: 20) { nodes { ${IMAGE} } }
+    media(first: 20) {
+      nodes {
+        mediaContentType
+        alt
+        previewImage { ${IMAGE} }
+        ... on MediaImage { image { ${IMAGE} } }
+        ... on Video { sources { url mimeType format height width } }
+      }
+    }
     priceRange { minVariantPrice { amount currencyCode } }
     variants(first: 10) {
       nodes {

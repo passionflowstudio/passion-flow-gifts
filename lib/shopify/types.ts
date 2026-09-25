@@ -9,6 +9,13 @@ export type ShopifyImage = {
   height: number | null;
 };
 
+export type VideoSource = { url: string; mimeType: string; format: string; height: number; width: number };
+
+// A product gallery item: an image or a Shopify-hosted video, in Shopify's order.
+export type GalleryMedia =
+  | { kind: 'image'; alt: string; image: ShopifyImage }
+  | { kind: 'video'; alt: string; poster: ShopifyImage | null; sources: VideoSource[] };
+
 export type ProductVariant = {
   id: string;
   title: string;
@@ -29,6 +36,7 @@ export type Product = {
   seo: { title: string | null; description: string | null };
   featuredImage: ShopifyImage | null;
   images: ShopifyImage[];
+  media: GalleryMedia[];
   priceRange: { minVariantPrice: Money };
   variants: ProductVariant[];
 };

@@ -289,10 +289,6 @@ html:has(.cart-drawer[open]){overflow:hidden}
 /* ---------- Product page ---------- */
 .product-page{background:var(--cream)}
 .product-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,80px);max-width:1360px;margin:0 auto;padding:clamp(28px,4vw,64px) clamp(20px,5vw,72px) clamp(60px,7vw,110px)}
-.product-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-content:start}
-.product-gallery-item{position:relative;aspect-ratio:1;overflow:hidden;border-radius:10px;background:var(--blush)}
-.product-gallery-item.is-main{grid-column:1/-1;aspect-ratio:1;border-radius:14px;box-shadow:0 22px 50px rgba(71,43,36,.14)}
-.product-gallery-item img{object-fit:cover}
 .product-summary{align-self:start;position:sticky;top:150px}
 .product-summary .eyebrow{margin-bottom:14px}
 .product-summary h1{margin:0 0 18px;font-size:clamp(34px,3.6vw,52px);line-height:1}
@@ -325,8 +321,6 @@ html:has(.cart-drawer[open]){overflow:hidden}
 .cart-foot{padding:16px 18px calc(18px + env(safe-area-inset-bottom))}
 .cart-line{grid-template-columns:72px 1fr auto;gap:12px}
 .cart-line-image{width:72px}
-.product-gallery{gap:6px}
-.product-gallery-item{border-radius:7px}
 }
 
 /* ---------- Status pages (error / not found) ---------- */
@@ -336,3 +330,34 @@ html:has(.cart-drawer[open]){overflow:hidden}
 .status-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px}
 .status-actions .button-primary{border:0;cursor:pointer}
 .status-link{color:var(--wine);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid}
+
+/* ---------- Product gallery (Etsy-style arrows) ---------- */
+.gallery{display:grid;grid-template-columns:76px minmax(0,1fr);gap:16px;align-items:start;min-width:0}
+.gallery-thumbs{display:flex;flex-direction:column;gap:10px;max-height:min(calc(100vw * .5),640px);overflow-y:auto;scrollbar-width:none;padding:3px}
+.gallery-thumbs::-webkit-scrollbar{display:none}
+.gallery-thumb{position:relative;flex:none;width:70px;aspect-ratio:1;padding:0;overflow:hidden;border:0;border-radius:10px;background:var(--blush);cursor:pointer;opacity:.72;transition:opacity .2s,box-shadow .2s}
+.gallery-thumb img{object-fit:cover}
+.gallery-thumb:hover{opacity:1}
+.gallery-thumb.is-active{opacity:1;box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--espresso)}
+.gallery-thumb-play{position:absolute;inset:0;display:grid;place-items:center;color:#fff;background:rgba(51,40,37,.28)}
+.gallery-stage{position:relative;aspect-ratio:1;border-radius:14px;background:var(--blush);box-shadow:0 22px 50px rgba(71,43,36,.14);outline-offset:6px;touch-action:pan-y}
+.gallery-slide{position:absolute;inset:0;overflow:hidden;border-radius:14px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s}
+.gallery-slide.is-active{opacity:1;visibility:visible}
+.gallery-slide img{object-fit:cover}
+.gallery-video{width:100%;height:100%;object-fit:cover;background:#000}
+.gallery-arrow{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:#fff;color:#222;box-shadow:0 1px 4px rgba(34,34,34,.25),0 4px 14px rgba(34,34,34,.12);cursor:pointer;transform:translateY(-50%);transition:transform .2s,box-shadow .2s}
+.gallery-arrow:hover{transform:translateY(-50%) scale(1.06);box-shadow:0 2px 6px rgba(34,34,34,.3),0 8px 20px rgba(34,34,34,.14)}
+.gallery-arrow:active{transform:translateY(-50%) scale(.96)}
+.gallery-arrow-prev{left:-24px}
+.gallery-arrow-next{right:-24px}
+.gallery-counter{position:absolute;right:14px;bottom:14px;z-index:2;padding:5px 10px;border-radius:999px;background:rgba(34,34,34,.62);color:#fff;font-size:11px;font-weight:500;font-variant-numeric:tabular-nums;pointer-events:none}
+
+@media(max-width:900px){
+.gallery{grid-template-columns:minmax(0,1fr);gap:10px}
+.gallery-thumbs{order:2;flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden}
+.gallery-thumb{width:62px}
+.gallery-arrow{width:40px;height:40px}
+.gallery-arrow svg{width:22px;height:22px}
+.gallery-arrow-prev{left:10px}
+.gallery-arrow-next{right:10px}
+}

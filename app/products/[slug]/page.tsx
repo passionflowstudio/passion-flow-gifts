@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductPurchase } from '@/components/product/ProductPurchase';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
 import { findBySlug } from '@/lib/catalog';
@@ -79,13 +79,7 @@ export default async function ProductPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <ProductViewTracker item={{ ...item, price: Number(variant.price.amount), currency: variant.price.currencyCode, quantity: 1 }} />
       <section className="product-hero">
-        <div className="product-gallery">
-          {images.slice(0, 5).map((image, index) => (
-            <div key={image.url} className={`product-gallery-item ${index === 0 ? 'is-main' : ''}`}>
-              <Image src={image.url} alt={image.altText ?? product.title} fill priority={index === 0} sizes={index === 0 ? '(max-width: 900px) 100vw, 55vw' : '(max-width: 900px) 25vw, 14vw'} />
-            </div>
-          ))}
-        </div>
+        <ProductGallery media={product.media} title={product.title} />
         <div className="product-summary">
           <span className="eyebrow">{entry.kind === 'bundle' ? 'GIFT BUNDLE' : 'PERSONALIZED DIGITAL GIFT'}</span>
           <h1>{product.title}</h1>
