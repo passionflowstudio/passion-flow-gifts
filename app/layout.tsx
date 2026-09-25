@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
+import { CartDrawer } from '@/components/cart/CartDrawer';
+import { CartProvider } from '@/components/cart/CartProvider';
 import { Analytics } from '@/components/site/Analytics';
 import { RevealObserver } from '@/components/site/RevealObserver';
 import { SaleBanner } from '@/components/site/SaleBanner';
@@ -50,10 +52,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
-        <SaleBanner />
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <CartProvider>
+          <SaleBanner />
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <CartDrawer />
+        </CartProvider>
         <RevealObserver />
         <Analytics />
       </body>

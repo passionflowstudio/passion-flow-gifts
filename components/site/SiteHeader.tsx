@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { etsy, nav } from '@/lib/site-config';
+import { CartButton } from '@/components/cart/CartButton';
 import { Wordmark } from './Wordmark';
 
 export function SiteHeader() {
@@ -22,7 +23,10 @@ export function SiteHeader() {
       <nav className="desktop-nav" aria-label="Primary navigation">
         {nav.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
-      <a className="shop-link desktop-shop" href={etsy.shop} target="_blank" rel="noreferrer">Shop Etsy <ArrowRight size={16} /></a>
+      <div className="header-actions">
+        <a className="shop-link desktop-shop" href={etsy.shop} target="_blank" rel="noreferrer">Shop Etsy <ArrowRight size={16} /></a>
+        <CartButton />
+      </div>
     </header>
   );
 }
