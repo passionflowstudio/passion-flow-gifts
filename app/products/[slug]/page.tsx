@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { Product } from '@/lib/shopify/types';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { AllAccessTeaser } from '@/components/allaccess/AllAccessTeaser';
 import { BundleUpsell } from '@/components/product/BundleUpsell';
@@ -6,11 +7,12 @@ import { FinalCta } from '@/components/product/FinalCta';
 import { ProductFaq } from '@/components/product/ProductFaq';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { StickyBuyBar } from '@/components/product/StickyBuyBar';
-import { ProductPurchase } from '@/components/product/ProductPurchase';
+import { ProductPurchase, type PurchaseOption } from '@/components/product/ProductPurchase';
+import { ReviewHighlight } from '@/components/product/ReviewHighlight';
 import { ProductReviews } from '@/components/product/ProductReviews';
 import { Stars } from '@/components/product/Stars';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
-import { findByHandle, findBySlug } from '@/lib/catalog';
+import { findByHandle, findBySlug, type CatalogEntry } from '@/lib/catalog';
 import { formatMoney } from '@/lib/money';
 import { productContent } from '@/lib/product-content';
 import { getProduct } from '@/lib/shopify/products';
@@ -50,6 +52,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// The bundle option shown next to a single product in the offer picker.
+async function bundleOption(entry: CatalogEntry): Promise<PurchaseOption | null> {
+  const bundleEntry = entry.bundle ? findBySlug(entry.bundle) : undefined;
+  if (!bundleEntry) return null;
+  const bundle: Product | null = await getProduct(bundleEntry.handle);
+  const variant = bundle?.variants.find(v => v.availableForSale);
+  if (!bundle || !variant || !bundle.availableForSale) return null;
+  const names = (bundleEntry.includes ?? []).map(slug => findBySlug(slug)?.name).filter((n): n is string => Boolean(n));
+  return {
+    key: 'bundle',
+    item: { productId: bundle.id, variantId: variant.id, handle: bundle.handle, title: bundle.title },
+    label: `Complete ${bundleEntry.name}`,
+    detail: `${names.length} gifts in 1, ready to wrap`,
+    includes: names,
+    price: variant.price,
+    compareAtPrice: variant.compareAtPrice,
+    image: bundle.featuredImage?.url,
+  };
+}
+
 // "Main title: Subtitle" renders as two lines, each kept on a single line.
 function ProductTitle({ title }: { title: string }) {
   const split = title.indexOf(':');
@@ -77,6 +99,7 @@ export default async function ProductPage({ params }: Props) {
   if (!variant) notFound();
 
   const extra = productContent(entry.slug);
+  const upgrade = await bundleOption(entry);
   const reviews = extra.reviews;
 
   const item = {
@@ -121,12 +144,26 @@ export default async function ProductPage({ params }: Props) {
             <span className="product-byline-shop">{brand.name}</span>
             {reviews && <><Stars rating={reviews.average} size={15} /><span className="product-byline-count">({reviews.count})</span></>}
           </a>
+          {extra.tags && <ul className="product-tags">{extra.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>}
           <ProductPurchase
-            item={item}
+            slug={entry.slug}
             available={available}
-            price={variant.price}
-            compareAtPrice={variant.compareAtPrice}
+            options={[
+              {
+                key: 'single',
+                item,
+                label: entry.name,
+                detail: extra.offerDetail ?? 'Instant digital download',
+                price: variant.price,
+                compareAtPrice: variant.compareAtPrice,
+                image: thumb,
+              },
+              ...(upgrade ? [upgrade] : []),
+            ]}
           />
+          {reviews && extra.highlightReview !== undefined && reviews.reviews[extra.highlightReview] && (
+            <ReviewHighlight review={reviews.reviews[extra.highlightReview]} />
+          )}
           <div className="product-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
         </div>
         {reviews && (
@@ -143,9 +180,9 @@ export default async function ProductPage({ params }: Props) {
         {entry.kind === 'bundle' && <BundleUpsell bundleSlug={entry.slug} />}
         <AllAccessTeaser fromProduct={entry.slug} />
         {extra.faqs && <ProductFaq faqs={extra.faqs} />}
-        <FinalCta item={item} headline={`Make your ${entry.name.toLowerCase()} today.`} priceLabel={priceLabel} image={thumb} available={available} />
+        <FinalCta item={item} headline={`Make your ${entry.name.toLowerCase()} today.`} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.item.variantId} />
       </div>
-      <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} />
+      <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.item.variantId} />
     </main>
   );
 }

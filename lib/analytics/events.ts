@@ -20,7 +20,7 @@ export type CommerceEvent =
   | { name: 'checkout_started'; items: CommerceItem[]; value: number; currency: string; cartToken: string; source: 'cart' | 'buy_now' }
   // Funnel steps after the main product: bundle and All Access offers.
   | { name: 'upsell_viewed'; offer: UpsellOffer; fromProduct: string }
-  | { name: 'upsell_clicked'; offer: UpsellOffer; fromProduct: string; action: 'add' | 'upgrade' | 'view' };
+  | { name: 'upsell_clicked'; offer: UpsellOffer; fromProduct: string; action: 'add' | 'upgrade' | 'view' | 'select' };
 
 export type UpsellOffer = 'bundle' | 'all_access';
 

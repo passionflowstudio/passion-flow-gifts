@@ -220,9 +220,22 @@ Also done (2026-09-25, verified desktop + 375px):
   the product is a draft; the savings line is hidden until all 4 gifts are
   priced live.
 
-Known gap: if the bundle is already in the cart, the single-product buttons
-(purchase, sticky bar, final CTA) still offer "Add to cart" for the matchbook,
-which is included in the bundle. Show "Included in your bundle" instead.
+Offer picker (2026-09-25, owner request after reviewing high-converting
+Shopify stores): the purchase box shows two option cards above Add to cart.
+- Card 1: this gift, selected by default for ad message match.
+- Card 2: "Complete Couple Gift Bundle", with the basket photo (the bundle's
+  first Shopify image), a "Best value · Save $X" flag from its compare-at
+  price, and the included gift names.
+- The price block and the "Add to cart · $X" button follow the selection.
+- Choosing the bundle when the single gift is already in the cart swaps it
+  in place. With the bundle in the cart, the single gift shows "Included in
+  your bundle" (the purchase box, sticky bar and final CTA all check this).
+- Benefit tags under the title and a review highlight under the buttons come
+  from `product-content.ts` (`tags`, `highlightReview`, `offerDetail`).
+- Events: upsell_clicked with action select, add or upgrade.
+- The lower BundleUpsell section stays as a reminder for people who scroll.
+- Test later: pre-selecting the bundle (A/B), and switching the gallery to
+  the bundle photos when the bundle card is selected.
 
 ## 9. Next steps (in order)
 

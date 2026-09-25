@@ -4,12 +4,13 @@ import Image from 'next/image';
 import { ArrowRight, Check } from 'lucide-react';
 import { useCart, type PurchasableItem } from '@/components/cart/CartProvider';
 
-type Props = { item: PurchasableItem; headline: string; priceLabel: string; image?: string; available: boolean };
+type Props = { item: PurchasableItem; headline: string; priceLabel: string; image?: string; available: boolean; bundleVariantId?: string };
 
 // Closing call to action at the bottom of the product page.
-export function FinalCta({ item, headline, priceLabel, image, available }: Props) {
+export function FinalCta({ item, headline, priceLabel, image, available, bundleVariantId }: Props) {
   const { cart, addItem, openCart, busy, pendingVariantId } = useCart();
-  const inCart = Boolean(cart?.lines.some(line => line.merchandise.id === item.variantId));
+  // Also counts as in the cart when its bundle is.
+  const inCart = Boolean(cart?.lines.some(line => line.merchandise.id === item.variantId || (bundleVariantId && line.merchandise.id === bundleVariantId)));
   const pending = pendingVariantId === item.variantId;
   if (!available) return null;
 

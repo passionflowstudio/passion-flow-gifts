@@ -31,6 +31,12 @@ export type Faq = { q: string; a: string };
 
 export type ProductContent = {
   badge?: string;
+  // Short benefit tags shown under the title.
+  tags?: string[];
+  // Second line on this product's card in the offer picker.
+  offerDetail?: string;
+  // Index into reviews.reviews of the quote shown under the buy buttons.
+  highlightReview?: number;
   reviews?: ReviewSummary;
   faqs?: Faq[];
 };
@@ -88,6 +94,9 @@ const coupleBundleReviews: ReviewSummary = {
 const content: Record<string, ProductContent> = {
   'couple-matchbook': {
     badge: 'Bestseller',
+    tags: ['Ready in 5 min', 'No design skills', 'Print any size'],
+    offerDetail: '3 designs + bonus anniversary edition',
+    highlightReview: 1,
     reviews: coupleMatchbookReviews,
     faqs: [
       { q: 'What’s included?', a: '3 matchbook poster designs (blush pink, red “The Perfect Match” and blue “How Lucky Are We”), a bonus Anniversary Edition design, your editable Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
@@ -96,6 +105,8 @@ const content: Record<string, ProductContent> = {
   },
   'couples-gift-bundle': {
     badge: 'Best value',
+    tags: ['4 gifts in 1', 'Ready in minutes', 'No design skills'],
+    highlightReview: 0,
     reviews: coupleBundleReviews,
     faqs: [
       { q: 'What’s in the bundle?', a: 'Four gifts: a custom matchbook poster, a playing card poster, a 50+ page couple photo book and a “The Couple Post” newspaper bouquet wrap. You get an editable Canva link for each one.' },

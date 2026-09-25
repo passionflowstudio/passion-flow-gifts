@@ -5,14 +5,15 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { useCart, type PurchasableItem } from '@/components/cart/CartProvider';
 
-type Props = { item: PurchasableItem; priceLabel: string; image?: string; available: boolean };
+type Props = { item: PurchasableItem; priceLabel: string; image?: string; available: boolean; bundleVariantId?: string };
 
 // Phone-only bar that appears once the main purchase buttons scroll out of
 // view, so Add to cart is always one tap away.
-export function StickyBuyBar({ item, priceLabel, image, available }: Props) {
+export function StickyBuyBar({ item, priceLabel, image, available, bundleVariantId }: Props) {
   const { cart, addItem, openCart, busy, pendingVariantId } = useCart();
   const [visible, setVisible] = useState(false);
-  const inCart = Boolean(cart?.lines.some(line => line.merchandise.id === item.variantId));
+  // Also counts as in the cart when its bundle is.
+  const inCart = Boolean(cart?.lines.some(line => line.merchandise.id === item.variantId || (bundleVariantId && line.merchandise.id === bundleVariantId)));
   const pending = pendingVariantId === item.variantId;
 
   useEffect(() => {
