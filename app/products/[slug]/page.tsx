@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductPurchase } from '@/components/product/ProductPurchase';
+import { ProductReviews } from '@/components/product/ProductReviews';
+import { Stars } from '@/components/product/Stars';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
 import { findBySlug } from '@/lib/catalog';
-import { formatMoney } from '@/lib/money';
+import { productContent } from '@/lib/product-content';
 import { getProduct } from '@/lib/shopify/products';
 import { brand, siteUrl } from '@/lib/site-config';
 
@@ -50,6 +52,9 @@ export default async function ProductPage({ params }: Props) {
   const variant = product.variants.find(v => v.availableForSale) ?? product.variants[0];
   if (!variant) notFound();
 
+  const extra = productContent(entry.slug);
+  const reviews = extra.reviews;
+
   const item = {
     productId: product.id,
     variantId: variant.id,
@@ -79,13 +84,29 @@ export default async function ProductPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <ProductViewTracker item={{ ...item, price: Number(variant.price.amount), currency: variant.price.currencyCode, quantity: 1 }} />
       <section className="product-hero">
-        <ProductGallery media={product.media} title={product.title} />
+        <div className="product-gallery-area">
+          <ProductGallery media={product.media} title={product.title} badge={extra.badge} />
+        </div>
         <div className="product-summary">
-          <span className="eyebrow">{entry.kind === 'bundle' ? 'GIFT BUNDLE' : 'PERSONALIZED DIGITAL GIFT'}</span>
+          <span className="eyebrow">MEANINGFUL GIFTS MADE FROM YOUR MEMORIES</span>
           <h1>{product.title}</h1>
-          <ProductPurchase item={item} available={product.availableForSale && variant.availableForSale} priceLabel={formatMoney(variant.price)} />
+          <a className="product-byline" href={reviews ? '#reviews' : '/'}>
+            <span className="product-byline-shop">{brand.name}</span>
+            {reviews && <><Stars rating={reviews.average} size={15} /><span className="product-byline-count">({reviews.count})</span></>}
+          </a>
+          <ProductPurchase
+            item={item}
+            available={product.availableForSale && variant.availableForSale}
+            price={variant.price}
+            compareAtPrice={variant.compareAtPrice}
+          />
           <div className="product-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
         </div>
+        {reviews && (
+          <div className="product-reviews-area">
+            <ProductReviews summary={reviews} />
+          </div>
+        )}
       </section>
     </main>
   );

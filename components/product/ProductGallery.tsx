@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from 'react';
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { Award, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import type { GalleryMedia, VideoSource } from '@/lib/shopify/types';
 
 const SWIPE_THRESHOLD = 40;
@@ -50,7 +50,7 @@ function GalleryVideo({ media, active }: { media: Extract<GalleryMedia, { kind: 
   );
 }
 
-export function ProductGallery({ media, title }: { media: GalleryMedia[]; title: string }) {
+export function ProductGallery({ media, title, badge }: { media: GalleryMedia[]; title: string; badge?: string }) {
   const [index, setIndex] = useState(0);
   const touchStart = useRef<number | null>(null);
   const thumbsRef = useRef<HTMLDivElement>(null);
@@ -112,6 +112,8 @@ export function ProductGallery({ media, title }: { media: GalleryMedia[]; title:
               : <GalleryVideo media={item} active={i === index} />}
           </div>
         ))}
+
+        {badge && <span className="gallery-badge"><Award size={17} strokeWidth={2} aria-hidden="true" />{badge}</span>}
 
         {count > 1 && (
           <>
