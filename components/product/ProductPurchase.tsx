@@ -1,12 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 import { ArrowRight, Check, CirclePlay, Download, Pencil } from 'lucide-react';
 import { useCart, type PurchasableItem } from '@/components/cart/CartProvider';
 import { track } from '@/lib/analytics/track';
 import { formatMoney } from '@/lib/money';
 import type { Money } from '@/lib/shopify/types';
+import { useOfferSelection } from './OfferSelection';
 
 // One purchasable choice in the offer picker. Prices always come from Shopify.
 export type PurchaseOption = {
@@ -92,7 +92,7 @@ function OfferPicker({ options, selected, onSelect }: { options: PurchaseOption[
 
 export function ProductPurchase({ slug, options, available }: Props) {
   const { cart, addItem, buyNow, upgradeToBundle, busy, pendingVariantId, error, isOpen, openCart, clearError } = useCart();
-  const [selectedKey, setSelectedKey] = useState(options[0].key);
+  const { selected: selectedKey, setSelected: setSelectedKey } = useOfferSelection(options[0].key);
   const selected = options.find(o => o.key === selectedKey) ?? options[0];
   const single = options.find(o => o.key === 'single');
   const bundle = options.find(o => o.key === 'bundle');

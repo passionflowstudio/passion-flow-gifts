@@ -234,8 +234,17 @@ Shopify stores): the purchase box shows two option cards above Add to cart.
   from `product-content.ts` (`tags`, `highlightReview`, `offerDetail`).
 - Events: upsell_clicked with action select, add or upgrade.
 - The lower BundleUpsell section stays as a reminder for people who scroll.
-- Test later: pre-selecting the bundle (A/B), and switching the gallery to
-  the bundle photos when the bundle card is selected.
+- The gallery follows the selection (`OfferSelectionProvider` +
+  `OfferGallery`). Choosing the bundle shows the bundle's Shopify media with
+  a "Best value" badge.
+- `hiddenMedia` in `product-content.ts` hides specific Shopify images on the
+  site. Bundle image `7944361983` is hidden because it shows the Etsy price;
+  it stays in Shopify.
+- Test later: pre-selecting the bundle (A/B).
+- Open question: the Etsy bundle copy listed sizes 8×10, 11×14, 12×16, 16×20,
+  18×24 and 20×30, but the product images show 8×10, 11×14, 12×18, 18×24,
+  20×30 (posters) and 6×6, 8×8, 12×12 (photo book). The Shopify copy uses
+  the image sizes; confirm with the owner.
 
 ## 9. Next steps (in order)
 

@@ -35,6 +35,9 @@ export type ProductContent = {
   tags?: string[];
   // Second line on this product's card in the offer picker.
   offerDetail?: string;
+  // Shopify media hidden on the site (matched against the image URL), e.g.
+  // Etsy graphics that show Etsy prices. The media stays in Shopify.
+  hiddenMedia?: string[];
   // Index into reviews.reviews of the quote shown under the buy buttons.
   highlightReview?: number;
   reviews?: ReviewSummary;
@@ -105,6 +108,8 @@ const content: Record<string, ProductContent> = {
   },
   'couples-gift-bundle': {
     badge: 'Best value',
+    // Shows the Etsy price ("$18.99 / Save Over 50%").
+    hiddenMedia: ['7944361983'],
     tags: ['4 gifts in 1', 'Ready in minutes', 'No design skills'],
     highlightReview: 0,
     reviews: coupleBundleReviews,
@@ -116,3 +121,13 @@ const content: Record<string, ProductContent> = {
 };
 
 export const productContent = (slug: string): ProductContent => content[slug] ?? {};
+
+// Drop media the site shouldn't show (see ProductContent.hiddenMedia).
+export function visibleMedia<T extends { kind: string; image?: { url: string }; poster?: { url: string } | null }>(slug: string, media: T[]): T[] {
+  const hidden = productContent(slug).hiddenMedia ?? [];
+  if (!hidden.length) return media;
+  return media.filter(item => {
+    const url = item.kind === 'image' ? item.image?.url : item.poster?.url;
+    return !hidden.some(id => url?.includes(id));
+  });
+}

@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import type { Product } from '@/lib/shopify/types';
+import type { GalleryMedia, Product } from '@/lib/shopify/types';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { AllAccessTeaser } from '@/components/allaccess/AllAccessTeaser';
 import { BundleUpsell } from '@/components/product/BundleUpsell';
 import { FinalCta } from '@/components/product/FinalCta';
 import { ProductFaq } from '@/components/product/ProductFaq';
-import { ProductGallery } from '@/components/product/ProductGallery';
+import { OfferGallery } from '@/components/product/OfferGallery';
+import { OfferSelectionProvider } from '@/components/product/OfferSelection';
 import { StickyBuyBar } from '@/components/product/StickyBuyBar';
 import { ProductPurchase, type PurchaseOption } from '@/components/product/ProductPurchase';
 import { ReviewHighlight } from '@/components/product/ReviewHighlight';
@@ -14,7 +15,7 @@ import { Stars } from '@/components/product/Stars';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
 import { findByHandle, findBySlug, type CatalogEntry } from '@/lib/catalog';
 import { formatMoney } from '@/lib/money';
-import { productContent } from '@/lib/product-content';
+import { productContent, visibleMedia } from '@/lib/product-content';
 import { getProduct } from '@/lib/shopify/products';
 import { brand, siteUrl } from '@/lib/site-config';
 
@@ -53,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // The bundle option shown next to a single product in the offer picker.
-async function bundleOption(entry: CatalogEntry): Promise<PurchaseOption | null> {
+async function bundleOption(entry: CatalogEntry): Promise<{ option: PurchaseOption; media: GalleryMedia[]; title: string; badge?: string } | null> {
   const bundleEntry = entry.bundle ? findBySlug(entry.bundle) : undefined;
   if (!bundleEntry) return null;
   const bundle: Product | null = await getProduct(bundleEntry.handle);
@@ -61,14 +62,19 @@ async function bundleOption(entry: CatalogEntry): Promise<PurchaseOption | null>
   if (!bundle || !variant || !bundle.availableForSale) return null;
   const names = (bundleEntry.includes ?? []).map(slug => findBySlug(slug)?.name).filter((n): n is string => Boolean(n));
   return {
-    key: 'bundle',
-    item: { productId: bundle.id, variantId: variant.id, handle: bundle.handle, title: bundle.title },
-    label: `Complete ${bundleEntry.name}`,
-    detail: `${names.length} gifts in 1, ready to wrap`,
-    includes: names,
-    price: variant.price,
-    compareAtPrice: variant.compareAtPrice,
-    image: bundle.featuredImage?.url,
+    option: {
+      key: 'bundle',
+      item: { productId: bundle.id, variantId: variant.id, handle: bundle.handle, title: bundle.title },
+      label: `Complete ${bundleEntry.name}`,
+      detail: `${names.length} gifts in 1, ready to wrap`,
+      includes: names,
+      price: variant.price,
+      compareAtPrice: variant.compareAtPrice,
+      image: bundle.featuredImage?.url,
+    },
+    media: visibleMedia(bundleEntry.slug, bundle.media),
+    title: bundle.title,
+    badge: productContent(bundleEntry.slug).badge,
   };
 }
 
@@ -133,9 +139,15 @@ export default async function ProductPage({ params }: Props) {
     <main className="product-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <ProductViewTracker item={{ ...item, price: Number(variant.price.amount), currency: variant.price.currencyCode, quantity: 1 }} />
+      <OfferSelectionProvider>
       <section className="product-hero">
         <div className="product-gallery-area">
-          <ProductGallery media={product.media} title={product.title} badge={extra.badge} />
+          <OfferGallery
+            sets={{
+              single: { media: visibleMedia(entry.slug, product.media), title: product.title, badge: extra.badge },
+              ...(upgrade ? { bundle: { media: upgrade.media, title: upgrade.title, badge: upgrade.badge } } : {}),
+            }}
+          />
         </div>
         <div className="product-summary">
           <span className="eyebrow">MEANINGFUL GIFTS MADE FROM YOUR MEMORIES</span>
@@ -158,7 +170,7 @@ export default async function ProductPage({ params }: Props) {
                 compareAtPrice: variant.compareAtPrice,
                 image: thumb,
               },
-              ...(upgrade ? [upgrade] : []),
+              ...(upgrade ? [upgrade.option] : []),
             ]}
           />
           {reviews && extra.highlightReview !== undefined && reviews.reviews[extra.highlightReview] && (
@@ -172,6 +184,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
         )}
       </section>
+      </OfferSelectionProvider>
 
       <div className="product-sections">
         {entry.bundle && (
@@ -180,9 +193,9 @@ export default async function ProductPage({ params }: Props) {
         {entry.kind === 'bundle' && <BundleUpsell bundleSlug={entry.slug} />}
         <AllAccessTeaser fromProduct={entry.slug} />
         {extra.faqs && <ProductFaq faqs={extra.faqs} />}
-        <FinalCta item={item} headline={`Make your ${entry.name.toLowerCase()} today.`} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.item.variantId} />
+        <FinalCta item={item} headline={`Make your ${entry.name.toLowerCase()} today.`} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
       </div>
-      <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.item.variantId} />
+      <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
     </main>
   );
 }
