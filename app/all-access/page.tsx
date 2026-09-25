@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { Check, Gift, Infinity as InfinityIcon, RefreshCw, Sparkles } from 'lucide-react';
 import { AllAccessJoin } from '@/components/allaccess/AllAccessJoin';
 import { allAccessPerks, perMonth } from '@/components/allaccess/content';
 import { ProductFaq } from '@/components/product/ProductFaq';
+import { GiftGrid } from '@/components/site/GiftGrid';
 import { SignupForm } from '@/components/site/SignupForm';
 import { allAccess, findBySlug } from '@/lib/catalog';
 import { formatMoney } from '@/lib/money';
@@ -14,7 +14,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'All Access: Every Gift Template, All Year',
-  description: 'Passion Flow Moments All Access: every Passion Flow gift template for couples, birthdays and best friends, plus new releases, for one yearly price.',
+  description: 'Passion Flow Studio All Access: every Passion Flow gift template for couples, birthdays and best friends, plus new releases, for one yearly price.',
   alternates: { canonical: allAccess.path },
 };
 
@@ -50,7 +50,7 @@ export default async function AllAccessPage() {
     <main className="aa-page">
       <section className="aa-hero">
         <div className="aa-hero-copy">
-          <span className="eyebrow">PASSION FLOW MOMENTS · ALL ACCESS{offer?.preview && <span className="aa-preview-tag">Preview</span>}</span>
+          <span className="eyebrow">PASSION FLOW STUDIO · ALL ACCESS{offer?.preview && <span className="aa-preview-tag">Preview</span>}</span>
           <h1>Never run out of <em>meaningful gift ideas.</em></h1>
           <p>Want a thoughtful gift ready for every occasion this year? All Access gives you every Passion Flow template, and every new one we release, for one yearly price.</p>
           <ul className="aa-perks">{allAccessPerks.map(perk => <li key={perk}><Check size={16} /> {perk}</li>)}</ul>
@@ -74,10 +74,8 @@ export default async function AllAccessPage() {
             </div>
           )}
         </div>
-        <div className="aa-hero-art" aria-hidden="true">
-          {['/hero-grid/couple-matchbook.jpg', '/hero-grid/bestie-pink.jpg', '/hero-grid/birthday-book.jpg', '/hero-grid/couple-bouquet.jpg', '/hero-grid/playing-cards.jpg', '/hero-grid/book-portrait.jpg'].map(src => (
-            <span key={src}><Image src={src} alt="" fill priority sizes="(max-width: 900px) 30vw, 16vw" /></span>
-          ))}
+        <div className="aa-hero-art">
+          <GiftGrid lead="This could be" message="all your gifts." priority sizes="(max-width: 900px) 30vw, 16vw" />
         </div>
       </section>
 

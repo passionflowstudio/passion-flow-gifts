@@ -2,8 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CirclePlay, Download, Gift, Heart, Pencil, Sparkles } from 'lucide-react';
 import { ProductCard } from '@/components/home/ProductCard';
+import { GiftGrid } from '@/components/site/GiftGrid';
 import { SignupForm } from '@/components/site/SignupForm';
-import { bundles, couples, friends, heroGrid, invites } from '@/lib/home-content';
+import { bundles, couples, friends, invites } from '@/lib/home-content';
 import { etsy, socialProof } from '@/lib/site-config';
 
 export const metadata = {
@@ -33,11 +34,7 @@ export default function Home() {
           <div className="hero-links"><Link href="#couples">For Couples</Link><i /><Link href="#friends">For Friends</Link><i /><Link href="#invites">For Invites</Link></div>
         </div>
         <div className="hero-gallery" aria-label="A gallery of personalized Passion Flow gifts">
-          <div className="hero-grid">
-            {heroGrid.map((tile, index) => tile === 'message'
-              ? <div className="hero-grid-message" key="message"><span>This could be</span><em>your gift.</em></div>
-              : <div className="hero-grid-tile" key={tile.src}><Image src={tile.src} alt={tile.alt} fill priority={index < 3} sizes="(max-width: 680px) 32vw, (max-width: 1100px) 27vw, 216px" /></div>)}
-          </div>
+          <GiftGrid lead="This could be" message="your gift." priority />
         </div>
       </section>
 

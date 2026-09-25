@@ -76,7 +76,7 @@ Products (IDs are stable; prices live in Shopify):
 | couples-gift-bundle | couple-gift-bundle-4-in-1-romantic-digital-gift-set | 11175336804519 | 51331316088999 | Active, $24.99, compare-at $47.96 (4 × $11.99) |
 | bestie-matchbook | best-friend-matchbook-poster-custom-birthday-gift | 11187615006887 | 51395163390119 | Draft |
 | birthday-photo-book | best-friend-photo-book-custom-birthday-keepsake | 11187614810279 | 51395162374311 | Draft |
-| all-access (planned) | `passion-flow-moments-all-access` | not created yet | | Planned |
+| all-access (planned) | `passion-flow-studio-all-access` | not created yet | | Planned |
 
 Matchbook and bundle media (14 or 15 images plus a video each) were imported
 from their Etsy listings with descriptive alt text. Descriptions and SEO
@@ -312,7 +312,7 @@ Shopify stores): the purchase box shows two option cards above Add to cart.
 - [ ] Install **Digital Downloads** and attach each product's PDF, which
       holds the Canva link and tutorial.
 - [ ] Install **Shopify Subscriptions** and create the All Access product
-      (handle `passion-flow-moments-all-access`) with a $49/year plan.
+      (handle `passion-flow-studio-all-access`) with a $49/year plan.
 - [ ] Finish and activate **Couple Newspaper**. The bundle savings line
       appears automatically once all 4 gifts are live.
 - [ ] The bundle's 2nd image shows the Etsy price ("$18.99 / Save Over

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { GiftGrid } from '@/components/site/GiftGrid';
 import { ArrowRight, Check } from 'lucide-react';
 import { UpsellViewTracker } from '@/components/product/UpsellViewTracker';
 import { allAccess } from '@/lib/catalog';
@@ -18,7 +18,7 @@ export async function AllAccessTeaser({ fromProduct }: { fromProduct: string }) 
     <section className="aa-teaser" aria-labelledby="aa-teaser-title">
       <UpsellViewTracker offer="all_access" fromProduct={fromProduct} />
       <div className="aa-teaser-copy">
-        <span className="eyebrow">PASSION FLOW MOMENTS · ALL ACCESS{offer.preview && <span className="aa-preview-tag">Preview</span>}</span>
+        <span className="eyebrow">PASSION FLOW STUDIO · ALL ACCESS{offer.preview && <span className="aa-preview-tag">Preview</span>}</span>
         <h2 id="aa-teaser-title">Never run out of <em>meaningful gift ideas.</em></h2>
         <p>Get every Passion Flow gift template for a whole year: couples, birthdays, best friends and every new release.</p>
         <ul>{allAccessPerks.slice(0, 3).map(perk => <li key={perk}><Check size={15} /> {perk}</li>)}</ul>
@@ -29,10 +29,8 @@ export async function AllAccessTeaser({ fromProduct }: { fromProduct: string }) 
           Explore All Access <ArrowRight size={16} />
         </AllAccessLink>
       </div>
-      <div className="aa-teaser-art" aria-hidden="true">
-        {['/hero-grid/couple-matchbook.jpg', '/hero-grid/birthday-book.jpg', '/hero-grid/bestie-pink.jpg', '/hero-grid/playing-cards.jpg'].map(src => (
-          <span key={src}><Image src={src} alt="" fill sizes="(max-width: 900px) 40vw, 18vw" /></span>
-        ))}
+      <div className="aa-teaser-art">
+        <GiftGrid lead="This could be" message="all your gifts." sizes="(max-width: 900px) 30vw, 14vw" />
       </div>
     </section>
   );

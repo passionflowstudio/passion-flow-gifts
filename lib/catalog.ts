@@ -31,9 +31,9 @@ export const findBySlug = (slug: string) => catalog.find(entry => entry.slug ===
 export const findByHandle = (handle: string) => catalog.find(entry => entry.handle === handle);
 export const slugForHandle = (handle: string) => findByHandle(handle)?.slug ?? handle;
 
-// Passion Flow Moments All Access: yearly membership, sold as a Shopify
+// Passion Flow Studio All Access: yearly membership, sold as a Shopify
 // subscription (selling plan). Configure the price in Shopify, not here.
 export const allAccess = {
-  handle: 'passion-flow-moments-all-access',
+  handle: 'passion-flow-studio-all-access',
   path: '/all-access',
 };

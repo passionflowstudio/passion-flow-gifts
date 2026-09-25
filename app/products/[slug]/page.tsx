@@ -3,7 +3,6 @@ import type { GalleryMedia, Product } from '@/lib/shopify/types';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { AllAccessTeaser } from '@/components/allaccess/AllAccessTeaser';
 import { BundleUpsell } from '@/components/product/BundleUpsell';
-import { FinalCta } from '@/components/product/FinalCta';
 import { ProductFaq } from '@/components/product/ProductFaq';
 import { OfferGallery } from '@/components/product/OfferGallery';
 import { OfferSelectionProvider } from '@/components/product/OfferSelection';
@@ -191,9 +190,9 @@ export default async function ProductPage({ params }: Props) {
           <BundleUpsell bundleSlug={entry.bundle} current={{ slug: entry.slug, variantId: variant.id, price: variant.price }} />
         )}
         {entry.kind === 'bundle' && <BundleUpsell bundleSlug={entry.slug} />}
-        <AllAccessTeaser fromProduct={entry.slug} />
         {extra.faqs && <ProductFaq faqs={extra.faqs} />}
-        <FinalCta item={item} headline={<>Make your {entry.name.toLowerCase()} <em>in minutes.</em></>} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
+        {/* Closing pitch: All Access after the product and bundle. */}
+        <AllAccessTeaser fromProduct={entry.slug} />
       </div>
       <StickyBuyBar item={item} priceLabel={priceLabel} image={thumb} available={available} bundleVariantId={upgrade?.option.item.variantId} />
     </main>
