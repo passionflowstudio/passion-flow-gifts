@@ -49,6 +49,7 @@ export const CART_FRAGMENT = /* GraphQL */ `
       nodes {
         id
         quantity
+        sellingPlanAllocation { sellingPlan { id name } }
         cost {
           totalAmount { amount currencyCode }
           amountPerQuantity { amount currencyCode }

@@ -3,7 +3,7 @@
 // success without a returned cart.
 import { storefrontFetch } from './client';
 import { CART_FRAGMENT } from './fragments';
-import type { Cart, CartAttribute, CartLine, CartWarning, UserError } from './types';
+import type { Cart, CartAttribute, CartLine, CartLineInput, CartWarning, UserError } from './types';
 
 export class CartError extends Error {
   constructor(message: string, readonly code: 'not_found' | 'rejected' | 'unavailable' | 'network') {
@@ -48,19 +48,20 @@ export async function fetchCart(cartId: string): Promise<Cart | null> {
   }
 }
 
-export function createCart(lines: { merchandiseId: string; quantity: number }[], attributes: CartAttribute[]) {
+export function createCart(lines: CartLineInput[], attributes: CartAttribute[]) {
   return mutate('cartCreate', `mutation CartCreate($input: CartInput!) {
     cartCreate(input: $input) { cart { ...CartFields } userErrors { field message code } warnings { code message target } }
   }`, { input: { lines, attributes } });
 }
 
-export function addLines(cartId: string, lines: { merchandiseId: string; quantity: number }[]) {
+export function addLines(cartId: string, lines: CartLineInput[]) {
   return mutate('cartLinesAdd', `mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
     cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ...CartFields } userErrors { field message code } warnings { code message target } }
   }`, { cartId, lines });
 }
 
-export function updateLines(cartId: string, lines: { id: string; quantity: number }[]) {
+// Can also swap a line's product in place (merchandiseId), e.g. single product → bundle.
+export function updateLines(cartId: string, lines: { id: string; quantity: number; merchandiseId?: string }[]) {
   return mutate('cartLinesUpdate', `mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) { cart { ...CartFields } userErrors { field message code } warnings { code message target } }
   }`, { cartId, lines });

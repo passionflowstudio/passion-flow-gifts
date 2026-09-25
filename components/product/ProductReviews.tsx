@@ -28,7 +28,7 @@ export function ProductReviews({ summary }: { summary: ReviewSummary }) {
     <section className="reviews" id="reviews" aria-labelledby="reviews-title">
       <div className="reviews-head">
         <h2 id="reviews-title">Reviews for this gift</h2>
-        <p className="reviews-source"><BadgeCheck size={15} /> Verified purchases from our {summary.source} shop</p>
+        <p className="reviews-source"><BadgeCheck size={15} /> Verified purchases from our {summary.source} shop{summary.note ? ` · ${summary.note}` : ''}</p>
       </div>
 
       <div className="reviews-summary">
@@ -60,6 +60,7 @@ export function ProductReviews({ summary }: { summary: ReviewSummary }) {
               <Stars rating={review.rating} size={15} />
               <span className="review-recommends"><Check size={13} /> Recommends</span>
             </div>
+            {review.product && <span className="review-product">{review.product}</span>}
             <p className="review-text">“{review.text}”</p>
             <div className="review-meta">
               <span className="review-avatar" aria-hidden="true">{review.name.charAt(0).toUpperCase()}</span>

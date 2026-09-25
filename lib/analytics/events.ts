@@ -14,10 +14,15 @@ export type CommerceItem = {
 
 export type CommerceEvent =
   | { name: 'product_viewed'; item: CommerceItem }
-  | { name: 'product_added_to_cart'; item: CommerceItem; cartToken: string; source: 'add_to_cart' | 'buy_now' }
+  | { name: 'product_added_to_cart'; item: CommerceItem; cartToken: string; source: 'add_to_cart' | 'buy_now' | 'bundle_upgrade' | 'upsell' }
   | { name: 'product_removed_from_cart'; item: CommerceItem; cartToken: string }
   | { name: 'cart_viewed'; items: CommerceItem[]; value: number; currency: string; cartToken: string }
-  | { name: 'checkout_started'; items: CommerceItem[]; value: number; currency: string; cartToken: string; source: 'cart' | 'buy_now' };
+  | { name: 'checkout_started'; items: CommerceItem[]; value: number; currency: string; cartToken: string; source: 'cart' | 'buy_now' }
+  // Funnel steps after the main product: bundle and All Access offers.
+  | { name: 'upsell_viewed'; offer: UpsellOffer; fromProduct: string }
+  | { name: 'upsell_clicked'; offer: UpsellOffer; fromProduct: string; action: 'add' | 'upgrade' | 'view' };
+
+export type UpsellOffer = 'bundle' | 'all_access';
 
 export type TrackedEvent = CommerceEvent & { eventId: string; at: string };
 

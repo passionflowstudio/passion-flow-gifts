@@ -44,6 +44,8 @@ export type Product = {
 export type CartLine = {
   id: string;
   quantity: number;
+  // Present when the line is a subscription (e.g. All Access yearly plan).
+  sellingPlanAllocation: { sellingPlan: { id: string; name: string } } | null;
   cost: { totalAmount: Money; amountPerQuantity: Money };
   merchandise: {
     id: string;
@@ -67,3 +69,5 @@ export type CartAttribute = { key: string; value: string };
 
 export type UserError = { field: string[] | null; message: string; code?: string | null };
 export type CartWarning = { code: string; message: string; target: string };
+
+export type CartLineInput = { merchandiseId: string; quantity: number; sellingPlanId?: string };

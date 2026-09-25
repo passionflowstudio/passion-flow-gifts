@@ -9,8 +9,15 @@ import type { Cart, CartAttribute, CartLine, CartWarning } from '@/lib/shopify/t
 
 const CART_ID_KEY = 'pf_cart_id';
 
-// What a product page knows about the item it's selling.
-export type PurchasableItem = Omit<CommerceItem, 'quantity' | 'price' | 'currency'>;
+// What a product page knows about the item it's selling. `sellingPlanId`
+// makes the line a subscription (All Access).
+export type PurchasableItem = Omit<CommerceItem, 'quantity' | 'price' | 'currency'> & { sellingPlanId?: string };
+
+const toLineInput = (item: PurchasableItem, quantity = 1) => ({
+  merchandiseId: item.variantId,
+  quantity,
+  ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {}),
+});
 
 type CartContextValue = {
   cart: Cart | null;
@@ -24,6 +31,7 @@ type CartContextValue = {
   clearError: () => void;
   addItem: (item: PurchasableItem, quantity?: number) => Promise<boolean>;
   buyNow: (item: PurchasableItem) => Promise<boolean>;
+  upgradeToBundle: (fromVariantId: string, bundle: PurchasableItem) => Promise<boolean>;
   updateQuantity: (line: CartLine, quantity: number) => Promise<void>;
   removeLine: (line: CartLine) => Promise<void>;
   checkout: () => Promise<void>;
@@ -117,7 +125,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setPendingVariantId(item.variantId);
     setError(null);
     const previousQuantity = cartRef.current ? findLine(cartRef.current, item.variantId)?.quantity ?? 0 : 0;
-    const lines = [{ merchandiseId: item.variantId, quantity }];
+    const lines = [toLineInput(item, quantity)];
     const attributes = attributionToCartAttributes(getAttribution());
     let warnings: CartWarning[] = [];
     try {
@@ -153,7 +161,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setError(null);
     let warnings: CartWarning[] = [];
     try {
-      const result = await createCart([{ merchandiseId: item.variantId, quantity: 1 }], attributionToCartAttributes(getAttribution()));
+      const result = await createCart([toLineInput(item)], attributionToCartAttributes(getAttribution()));
       warnings = result.warnings;
       const line = findLine(result.cart, item.variantId);
       if (!line) throw new CartError('This item is currently unavailable.', 'unavailable');
@@ -171,6 +179,35 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return false;
     }
   }, []);
+
+  // Swap a single product already in the cart for its bundle in one Shopify
+  // mutation, so the shopper never pays for both.
+  const upgradeToBundle = useCallback(async (fromVariantId: string, bundle: PurchasableItem) => {
+    const current = cartRef.current;
+    const fromLine = current ? findLine(current, fromVariantId) : undefined;
+    if (!current || !fromLine) return addItem(bundle);
+    setBusy(true);
+    setPendingVariantId(bundle.variantId);
+    setError(null);
+    try {
+      const result = await updateLines(current.id, [{ id: fromLine.id, merchandiseId: bundle.variantId, quantity: 1 }]);
+      const bundleLine = findLine(result.cart, bundle.variantId);
+      if (!bundleLine || findLine(result.cart, fromVariantId)) throw new CartError('We couldn’t upgrade your cart. Please try again.', 'rejected');
+      commit(result.cart);
+      setIsOpen(true);
+      const cartToken = publicCartToken(result.cart.id);
+      track({ name: 'product_removed_from_cart', item: lineToItem(fromLine), cartToken });
+      track({ name: 'product_added_to_cart', item: lineToItem(bundleLine, 1), cartToken, source: 'bundle_upgrade' });
+      return true;
+    } catch (error) {
+      if (error instanceof CartError && error.code === 'not_found') commit(null);
+      setError(explain(error));
+      return false;
+    } finally {
+      setBusy(false);
+      setPendingVariantId(null);
+    }
+  }, [addItem, commit]);
 
   const updateQuantity = useCallback(async (line: CartLine, quantity: number) => {
     const current = cartRef.current;
@@ -234,8 +271,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     openCart,
     closeCart: () => setIsOpen(false),
     clearError: () => setError(null),
-    addItem, buyNow, updateQuantity, removeLine, checkout,
-  }), [cart, ready, isOpen, busy, pendingVariantId, error, openCart, addItem, buyNow, updateQuantity, removeLine, checkout]);
+    addItem, buyNow, upgradeToBundle, updateQuantity, removeLine, checkout,
+  }), [cart, ready, isOpen, busy, pendingVariantId, error, openCart, addItem, buyNow, upgradeToBundle, updateQuantity, removeLine, checkout]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

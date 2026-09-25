@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
-import { ArrowRight, Download, X } from 'lucide-react';
+import { ArrowRight, Download, RefreshCw, X } from 'lucide-react';
 import { formatMoney } from '@/lib/money';
 import { slugForHandle } from '@/lib/catalog';
 import { useCart } from './CartProvider';
@@ -63,7 +63,7 @@ export function CartDrawer() {
                     </Link>
                     <div className="cart-line-body">
                       <Link href={href} className="cart-line-title" onClick={closeCart}>{line.merchandise.product.title}</Link>
-                      <span className="cart-line-meta"><Download size={12} /> Digital download</span>
+                      <span className="cart-line-meta">{line.sellingPlanAllocation ? <><RefreshCw size={12} /> {line.sellingPlanAllocation.sellingPlan.name}</> : <><Download size={12} /> Digital download</>}</span>
                       {!line.merchandise.availableForSale && <span className="cart-line-warning">No longer available — please remove.</span>}
                       <div className="cart-line-controls">
                         <button type="button" className="cart-remove" onClick={() => removeLine(line)} disabled={busy}>Remove</button>

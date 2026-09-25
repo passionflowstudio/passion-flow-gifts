@@ -10,10 +10,13 @@ export type Review = {
   rating: 1 | 2 | 3 | 4 | 5;
   text: string;
   response?: string; // reply from Passion Flow Studio
+  product?: string; // set when a review is about a specific gift (e.g. on bundle pages)
 };
 
 export type ReviewSummary = {
   source: 'Etsy';
+  // Shown under the heading, e.g. to explain reviews are for gifts in a bundle.
+  note?: string;
   sourceUrl: string;
   average: number;
   count: number;
@@ -24,10 +27,23 @@ export type ReviewSummary = {
   reviews: Review[];
 };
 
+export type Faq = { q: string; a: string };
+
 export type ProductContent = {
   badge?: string;
   reviews?: ReviewSummary;
+  faqs?: Faq[];
 };
+
+// Shared answers for every Canva template product.
+const templateFaqs: Faq[] = [
+  { q: 'Do I need Canva Pro?', a: 'No. Everything works with a free Canva account. You just need an internet browser or the Canva app.' },
+  { q: 'How do I get my template?', a: 'Right after checkout you’ll get a download link on your order confirmation page and by email. It opens a PDF with your Canva template link and the video tutorial.' },
+  { q: 'How long does it take to make?', a: 'Most people finish in about 5 minutes. The design is already done, so you just drop in your photos and change the names, dates and words.' },
+  { q: 'How do I print it?', a: 'Download your finished design as a PDF or PNG and print at home, order through Canva Print, or take it to any local print shop.' },
+  { q: 'Will anything be shipped to me?', a: 'No. This is a digital download, so nothing physical ships. Printing, frames and flowers aren’t included.' },
+  { q: 'What if I need help?', a: 'Email us at passionflow.studio@gmail.com and we’ll help you get it just right.' },
+];
 
 const coupleMatchbookReviews: ReviewSummary = {
   source: 'Etsy',
@@ -57,8 +73,35 @@ const coupleMatchbookReviews: ReviewSummary = {
   ],
 };
 
+const coupleBundleReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
+  note: 'Includes reviews of the gifts in this bundle',
+  average: 5.0,
+  count: 16,
+  reviews: [
+    { name: 'Sydney', date: '2026-06-08', rating: 5, text: 'great quick template for what I needed', product: 'Couple Gift Bundle' },
+    ...coupleMatchbookReviews.reviews.map(review => ({ ...review, product: 'Matchbook Poster' })),
+  ],
+};
+
 const content: Record<string, ProductContent> = {
-  'couple-matchbook': { badge: 'Bestseller', reviews: coupleMatchbookReviews },
+  'couple-matchbook': {
+    badge: 'Bestseller',
+    reviews: coupleMatchbookReviews,
+    faqs: [
+      { q: 'What’s included?', a: '3 matchbook poster designs (blush pink, red “The Perfect Match” and blue “How Lucky Are We”), a bonus Anniversary Edition design, your editable Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
+      ...templateFaqs,
+    ],
+  },
+  'couples-gift-bundle': {
+    badge: 'Best value',
+    reviews: coupleBundleReviews,
+    faqs: [
+      { q: 'What’s in the bundle?', a: 'Four gifts: a custom matchbook poster, a playing card poster, a 50+ page couple photo book and a “The Couple Post” newspaper bouquet wrap. You get an editable Canva link for each one.' },
+      ...templateFaqs,
+    ],
+  },
 };
 
 export const productContent = (slug: string): ProductContent => content[slug] ?? {};

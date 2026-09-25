@@ -5,6 +5,8 @@
 export type CatalogEntry = {
   slug: string;
   handle: string;
+  // Short display name for tiles and bundle breakdowns.
+  name: string;
   kind: 'product' | 'bundle';
   collections: ('couples' | 'best-friends' | 'birthdays')[];
   // For bundles: slugs of the products included.
@@ -14,15 +16,22 @@ export type CatalogEntry = {
 };
 
 export const catalog: CatalogEntry[] = [
-  { slug: 'couple-matchbook', handle: 'couple-matchbook-custom-printable-art-poster', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
-  { slug: 'playing-cards', handle: 'custom-playing-cards-personalized-couple-gift', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
-  { slug: 'couple-photo-book', handle: 'couple-photo-book-custom-printable-memory-book', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
-  { slug: 'couple-newspaper', handle: 'couple-newspaper-custom-printable-newspaper-print', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
-  { slug: 'couples-gift-bundle', handle: 'couple-gift-bundle-4-in-1-romantic-digital-gift-set', kind: 'bundle', collections: ['couples'], includes: ['couple-matchbook', 'playing-cards', 'couple-photo-book', 'couple-newspaper'] },
-  { slug: 'bestie-matchbook', handle: 'best-friend-matchbook-poster-custom-birthday-gift', kind: 'product', collections: ['best-friends', 'birthdays'] },
-  { slug: 'birthday-photo-book', handle: 'best-friend-photo-book-custom-birthday-keepsake', kind: 'product', collections: ['best-friends', 'birthdays'] },
+  { slug: 'couple-matchbook', name: 'Matchbook Poster', handle: 'couple-matchbook-custom-printable-art-poster', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
+  { slug: 'playing-cards', name: 'Playing Card Poster', handle: 'custom-playing-cards-personalized-couple-gift', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
+  { slug: 'couple-photo-book', name: 'Couple Photo Book', handle: 'couple-photo-book-custom-printable-memory-book', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
+  { slug: 'couple-newspaper', name: 'Newspaper Bouquet', handle: 'couple-newspaper-custom-printable-newspaper-print', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
+  { slug: 'couples-gift-bundle', name: 'Couple Gift Bundle', handle: 'couple-gift-bundle-4-in-1-romantic-digital-gift-set', kind: 'bundle', collections: ['couples'], includes: ['couple-matchbook', 'playing-cards', 'couple-photo-book', 'couple-newspaper'] },
+  { slug: 'bestie-matchbook', name: 'Bestie Matchbook Poster', handle: 'best-friend-matchbook-poster-custom-birthday-gift', kind: 'product', collections: ['best-friends', 'birthdays'] },
+  { slug: 'birthday-photo-book', name: 'Birthday Photo Book', handle: 'best-friend-photo-book-custom-birthday-keepsake', kind: 'product', collections: ['best-friends', 'birthdays'] },
 ];
 
 export const findBySlug = (slug: string) => catalog.find(entry => entry.slug === slug);
 export const findByHandle = (handle: string) => catalog.find(entry => entry.handle === handle);
 export const slugForHandle = (handle: string) => findByHandle(handle)?.slug ?? handle;
+
+// Passion Flow Moments All Access: yearly membership, sold as a Shopify
+// subscription (selling plan). Configure the price in Shopify, not here.
+export const allAccess = {
+  handle: 'passion-flow-moments-all-access',
+  path: '/all-access',
+};
