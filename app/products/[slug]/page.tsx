@@ -44,6 +44,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// "Main title: Subtitle" renders as two lines, each kept on a single line.
+function ProductTitle({ title }: { title: string }) {
+  const split = title.indexOf(':');
+  if (split === -1) return <h1 className="product-title">{title}</h1>;
+  return (
+    <h1 className="product-title is-split">
+      <span>{title.slice(0, split + 1)}</span>
+      <span>{title.slice(split + 1).trim()}</span>
+    </h1>
+  );
+}
+
 export default async function ProductPage({ params }: Props) {
   const data = await load((await params).slug);
   if (!data) notFound();
@@ -89,7 +101,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
         <div className="product-summary">
           <span className="eyebrow">MEANINGFUL GIFTS MADE FROM YOUR MEMORIES</span>
-          <h1>{product.title}</h1>
+          <ProductTitle title={product.title} />
           <a className="product-byline" href={reviews ? '#reviews' : '/'}>
             <span className="product-byline-shop">{brand.name}</span>
             {reviews && <><Stars rating={reviews.average} size={15} /><span className="product-byline-count">({reviews.count})</span></>}
