@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { BadgeCheck, Check, ExternalLink } from 'lucide-react';
+import { BadgeCheck, Check } from 'lucide-react';
 import type { ReviewSummary } from '@/lib/product-content';
 import { Stars } from './Stars';
 
@@ -83,7 +83,6 @@ export function ProductReviews({ summary }: { summary: ReviewSummary }) {
             {expanded ? 'Show fewer reviews' : `Show all ${summary.reviews.length} reviews`}
           </button>
         )}
-        <a className="reviews-etsy" href={summary.sourceUrl} target="_blank" rel="noreferrer">See these reviews on {summary.source} <ExternalLink size={13} /></a>
       </div>
     </section>
   );

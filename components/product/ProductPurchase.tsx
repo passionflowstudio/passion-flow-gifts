@@ -6,6 +6,8 @@ import { useCart, type PurchasableItem } from '@/components/cart/CartProvider';
 import { track } from '@/lib/analytics/track';
 import { formatMoney } from '@/lib/money';
 import type { Money } from '@/lib/shopify/types';
+import { useMidnightCountdown } from '@/hooks/useMidnightCountdown';
+import { saleBanner } from '@/lib/site-config';
 import { useOfferSelection } from './OfferSelection';
 
 // One purchasable choice in the offer picker. Prices always come from Shopify.
@@ -45,13 +47,19 @@ const saleInfo = (price: Money, compareAtPrice: Money | null) => {
 
 function PriceBlock({ price, compareAtPrice }: { price: Money; compareAtPrice: Money | null }) {
   const sale = saleInfo(price, compareAtPrice);
+  const countdown = useMidnightCountdown();
   if (!sale) return <p className="purchase-price"><span className="price-now">{formatMoney(price)}</span></p>;
   return (
-    <p className="purchase-price" aria-label={`Sale price ${formatMoney(price)}, was ${formatMoney(compareAtPrice!)}, ${sale.percentOff}% off`}>
-      <span className="price-now">Now {formatMoney(price)}</span>
-      <s className="price-was">{formatMoney(compareAtPrice!)}</s>
-      <span className="price-off">{sale.percentOff}% off</span>
-    </p>
+    <div className="purchase-price-block">
+      <p className="purchase-price" aria-label={`Sale price ${formatMoney(price)}, was ${formatMoney(compareAtPrice!)}, ${sale.percentOff}% off`}>
+        <span className="price-now">Now {formatMoney(price)}</span>
+        <s className="price-was">{formatMoney(compareAtPrice!)}</s>
+      </p>
+      <p className="price-sale-line">
+        <span>{sale.percentOff}% off</span>
+        {saleBanner.enabled && <><i aria-hidden="true" /><span>Sale ends in <strong>{countdown}</strong></span></>}
+      </p>
+    </div>
   );
 }
 
