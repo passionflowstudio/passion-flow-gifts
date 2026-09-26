@@ -96,10 +96,14 @@ const playingCardsReviews: ReviewSummary = {
   note: 'Selected reviews',
   ...shopRating,
   reviews: [
-    { name: 'Avery', date: '2026-07-22', rating: 5, text: 'Absolutely amazing. Customized it with my own pictures and letters on the cards and it was the perfect gift.' },
+    { name: 'Avery', date: '2026-07-22', rating: 5, text: 'Absolutely amazing. Customized it with my own pictures and letters on the cards and it was the perfect gift.', response: 'thank you! we are glad your gift turned out amazing:)' },
     { name: 'Walter', date: '2026-02-17', rating: 5, text: 'Great template and easy to use!' },
     { name: 'Leah', date: '2026-02-12', rating: 5, text: 'Wow I’m honestly blown away by how beautiful this turned out! Definitely the best custom playing cards I’ve found so far. 🥹' },
-    { name: 'Julia', date: '2026-02-02', rating: 5, text: 'awesome, aesthetic, creative freedom at large' },
+    { name: 'Julia', date: '2026-02-02', rating: 5, text: 'awesome, aesthetic, creative freedom at large', response: 'thank you Julia:) I’m glad our designs have given you creative freedom! we hope your poster turned out beautiful🤍' },
+    { name: 'benjamin', date: '2026-01-30', rating: 5, text: 'great work good quality product' },
+    { name: 'Jessica', date: '2026-01-19', rating: 5, text: 'Great and easy to use :) instructions were very helpful to follow - I can’t wait to get it printed and framed !' },
+    { name: 'Tiffany', date: '2025-12-16', rating: 5, text: 'Great product. Would buy again', response: 'thanks Tiffany! we hope your frame turns out beautiful:)' },
+    { name: 'Jordan', date: '2025-11-18', rating: 5, text: 'Good product and was really cute' },
   ],
 };
 
