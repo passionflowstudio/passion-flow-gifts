@@ -78,7 +78,7 @@ Products (IDs are stable; prices live in Shopify):
 | birthday-photo-book | best-friend-photo-book-custom-birthday-keepsake | 11187614810279 | 51395162374311 | Active, $11.99, compare-at $29.98 |
 | best-friend-birthday-bundle | best-friend-birthday-gift-bundle-4-in-1 | 11193810124967 | 51423523307687 | Active, $24.99, compare-at $47.96 (4 × $11.99) |
 | bestie-playing-cards | bestie-playing-cards-custom-photo-gift | 11193811632295 | 51423542608039 | Active, $11.99, compare-at $29.98 |
-| bestie-newspaper | bestie-newspaper-custom-birthday-gift (planned) | not created yet | | Planned (bundle tile uses a local image) |
+| bestie-newspaper | bestie-newspaper-custom-birthday-gift | 11193818218663 | 51423575244967 | Active, $11.99, compare-at $29.98 |
 | all-access (planned) | `passion-flow-studio-all-access` | not created yet | | Planned |
 
 Matchbook and bundle media (14 or 15 images plus a video each) were imported
@@ -354,10 +354,8 @@ Best Friend Birthday Bundle (2026-09-25):
   price ($18.99).
 - Catalog: `bundle: 'best-friend-birthday-bundle'` is set on bestie-matchbook,
   bestie-playing-cards, birthday-photo-book and bestie-newspaper.
-- The newspaper isn't in Shopify yet. Its catalog entry uses a planned
-  handle plus a local `fallbackImage`, and its tile reads "Included". Once
-  it's live, the savings line shows automatically. If the real handle
-  differs from the planned one, update `lib/catalog.ts`.
+- All 4 gifts are live, so the bundle shows "Bought separately $47.96 ·
+  You save $22.97 (48%)".
 - Bundle section headings now come from `bundleCopy` in `product-content.ts`
   per bundle (couple copy unchanged).
 - Reviews: no bundle reviews exist, so it shows the labeled bestie
@@ -373,6 +371,17 @@ Bestie Playing Card Poster (2026-09-25):
 - Reviews: the listing has 1 review (Megan, 5.0). The page shows the 4.9 shop
   rating under "Reviews from our shop". Megan's review comes first, then
   labeled best-friend gift reviews.
+
+Birthday Newspaper Print (2026-09-25):
+- Shopify: created and ACTIVE. 18 Etsy photos plus the video (second) and
+  the bouquet photo from the bundle listing (third). Title "Birthday
+  Newspaper Print: Editable Canva Template", hook "Want to make your bestie
+  / *the front-page story?*", SEO, $11.99, compare-at $29.98.
+- The catalog name is "Newspaper Print", matching the couple one.
+- There are no listing reviews, so it uses `birthdayNewspaperReviews`:
+  labeled best-friend gift reviews under "Reviews from our shop" and the
+  4.9 shop rating.
+- All 7 couple and best-friend product pages are now built.
 
 ## 9. Next steps (in order)
 

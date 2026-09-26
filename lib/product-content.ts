@@ -237,6 +237,21 @@ const bestiePlayingCardsReviews: ReviewSummary = {
   ],
 };
 
+// No listing reviews yet: real reviews of our other best friend gifts, each
+// labeled, under the shop rating. Never invent reviews.
+const birthdayNewspaperReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/shop/passionflowstudios#reviews',
+  note: 'Real reviews of our best friend gifts',
+  about: 'shop',
+  ...shopRating,
+  reviews: [
+    ...bestieMatchbookReviews.reviews.map(review => ({ ...review, product: 'Bestie Matchbook Poster' })),
+    { ...bestiePlayingCardsReviews.reviews[0] },
+    ...birthdayPhotoBookReviews.reviews.map(review => ({ ...review, product: 'Birthday Photo Book' })),
+  ],
+};
+
 // No bundle reviews yet: the real reviews of the bundle's gifts that are
 // already on the site, each labeled with its gift, under the shop rating.
 const bestFriendBundleReviews: ReviewSummary = {
@@ -357,6 +372,19 @@ content['bestie-playing-cards'] = {
   ],
 };
 
+content['bestie-newspaper'] = {
+  tags: ['4 headlines', 'Ready in 5 min', 'Print any size'],
+  offerDetail: '4 headline designs',
+  highlightReview: 0,
+  reviews: birthdayNewspaperReviews,
+  faqs: [
+    { q: 'What’s included?', a: '1 editable “The Birthday Times” newspaper template with 4 headline designs (“Bestie Birthday Icon”, “Turns 25 Today!”, “She’s That Girl” and “Birthday Main Character”), your Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
+    { q: 'Can I write my own headline?', a: 'Yes. Change the title, birth date, headline, sub-headline and photo to anything you like.' },
+    { q: 'Can I wrap flowers in it?', a: 'Yes. Print it on regular or large paper and wrap it around a bouquet, or frame it as wall art.' },
+    ...templateFaqs,
+  ],
+};
+
 content['best-friend-birthday-bundle'] = {
   bundleCopy: {
     upsell: ['Give her the whole', 'birthday surprise.'],
@@ -368,7 +396,7 @@ content['best-friend-birthday-bundle'] = {
   highlightReview: 0,
   reviews: bestFriendBundleReviews,
   faqs: [
-    { q: 'What’s in the bundle?', a: 'Four gifts: a bestie matchbook poster, a playing card poster, a birthday photo book with 40+ page designs and a “The Birthday Times” newspaper bouquet wrap. You get an editable Canva link for each one.' },
+    { q: 'What’s in the bundle?', a: 'Four gifts: a bestie matchbook poster, a playing card poster, a birthday photo book with 40+ page designs and a “The Birthday Times” newspaper print you can frame or wrap around flowers. You get an editable Canva link for each one.' },
     { q: 'How long does it take to make?', a: 'Each poster takes about 5 minutes. The photo book has more pages to fill, so most people spend under an hour on it.' },
     ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
   ],
