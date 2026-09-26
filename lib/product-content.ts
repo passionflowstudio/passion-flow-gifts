@@ -107,6 +107,36 @@ const playingCardsReviews: ReviewSummary = {
   ],
 };
 
+// Etsy listing stats: 4.9 average, 17 reviews. Shown as selected reviews
+// (one mildly critical review and one pending owner confirmation omitted).
+const couplePhotoBookReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4348775091/couple-photo-book-o-custom-gifts',
+  note: 'Selected reviews',
+  average: 4.9,
+  count: 17,
+  itemQuality: 4.9,
+  customerService: 5.0,
+  recommendPercent: 100,
+  reviews: [
+    { name: 'Kungkea', date: '2025-11-16', rating: 5, text: 'Surprised my bf with it and he cried looking through the book', response: 'aww we’re so glad🥹it makes us so happy. we hope your photo book turned out beautiful🩷' },
+    { name: 'Zaara', date: '2026-06-02', rating: 5, text: 'amazing product and very easy to use' },
+    { name: 'Ashleigh', date: '2026-05-15', rating: 5, text: 'I am very happy with my order. The seller is fantastic and delivers quality goods with no surprises - You get what you pay for! I could even say what I got was even better than I anticipated. Thanks!! Another day, another satisfied customer :)' },
+    { name: 'Etsy buyer', date: '2026-04-08', rating: 5, text: 'As soon as I paid for it, I received it. The template was amazing. It made it so easy to just go ahead and make my boyfriend‘s gift. Thank you so much.' },
+    { name: 'Jonathan', date: '2026-01-23', rating: 5, text: 'gf loved it alot - really easy to follow' },
+    { name: 'Jessica', date: '2025-12-28', rating: 5, text: 'I love this product and it was great for a present' },
+    { name: 'Hailey', date: '2025-12-19', rating: 5, text: 'my boyfriend loved this for our anniversary!!', response: 'I’m so glad your boyfriend loved it:) We hope your photo book turned out beautiful with your photos!' },
+    { name: 'bangtanswcrld', date: '2025-12-12', rating: 5, text: 'amazing ♡ the book is so cute and well designed. super cheap considering how well its made!' },
+    { name: 'catu', date: '2025-11-21', rating: 5, text: 'i found this on tiktok and its so cool' },
+    { name: 'Kristina', date: '2025-11-09', rating: 5, text: 'This is literally the best' },
+    { name: 'Elisa', date: '2025-10-18', rating: 5, text: 'It’s so cute, I love how you can pick and choose out of 52 diff designed pages.', response: 'thank you so muchhh! thank you for supporting our shop:)' },
+    { name: 'Lily', date: '2025-10-02', rating: 5, text: 'Exactly as described, bought to use some of the slides and they’re gorgeous. Easy to download and create.' },
+    { name: 'phobs', date: '2025-09-22', rating: 5, text: 'such a cute and fun template - super fun to fill out:)' },
+    { name: 'HoopsHaven', date: '2025-09-06', rating: 5, text: 'so easy to use. very lovely' },
+    { name: 'Nico', date: '2025-09-01', rating: 5, text: 'very cute and easy to customise' },
+  ],
+};
+
 const coupleBundleReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
@@ -116,6 +146,7 @@ const coupleBundleReviews: ReviewSummary = {
     { name: 'Sydney', date: '2026-06-08', rating: 5, text: 'great quick template for what I needed', product: 'Couple Gift Bundle' },
     ...coupleMatchbookReviews.reviews.map(review => ({ ...review, product: 'Matchbook Poster' })),
     ...playingCardsReviews.reviews.map(review => ({ ...review, product: 'Playing Card Poster' })),
+    ...couplePhotoBookReviews.reviews.map(review => ({ ...review, product: 'Couple Photo Book' })),
   ],
 };
 
@@ -141,6 +172,20 @@ const content: Record<string, ProductContent> = {
       { q: 'What’s included?', a: '6 playing card poster designs (Lucky Me, Lucky in Love, You Light Up the Room, How Lucky Are We?, I Love You More and a custom message card), a bonus My Favorite Person design, your editable Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
       { q: 'Can I add our initials?', a: 'Yes. The king and queen cards are made for your initials, and you can change every word on the poster in Canva.' },
       ...templateFaqs,
+    ],
+  },
+  'couple-photo-book': {
+    badge: 'Bestseller',
+    tags: ['50+ pages', 'No design skills', 'Print or share'],
+    offerDetail: '50+ ready-made page designs',
+    highlightReview: 0,
+    reviews: couplePhotoBookReviews,
+    faqs: [
+      { q: 'What’s included?', a: 'One editable couple photo book template with 50+ page designs (where we first met, our first date, a letter for you, our playlist, texts that made me smile, our bucket list, a travel map and more), your Canva link, a video tutorial and square sizes: 6×6, 8×8 and 12×12.' },
+      { q: 'Can I print it as a real book?', a: 'Yes. Order it as a printed photo book through Canva Print, or download a PDF and take it to any local print shop. You can also share it digitally.' },
+      { q: 'Do I have to use every page?', a: 'No. Pick your favorite pages, reorder them and skip the rest. It’s your story, your way.' },
+      { q: 'How long does it take to make?', a: 'It depends on how many pages you fill. Every page is already designed, so there’s no layout work, just your photos and words.' },
+      ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
     ],
   },
   'couples-gift-bundle': {

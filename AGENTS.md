@@ -294,6 +294,19 @@ Playing Cards page (2026-09-25):
   Photo Book 392, Couple Photo Book 343, Bestie Matchbook 270, BF Birthday
   Bundle 40, Bestie Playing Cards 25. Shop: 2,815 orders, ~1.8% conversion.
 
+Couple Photo Book page (2026-09-25):
+- Shopify: Etsy media imported (12 photos plus the video), title "Couple
+  Photo Book: Editable Canva Template", new description/SEO, compare-at
+  $29.98.
+- Honest item stats: 4.9 average, 17 reviews, item quality 4.9, customer
+  service 5.0, 100% recommend.
+- 15 selected reviews. Omitted: "Bob" (mildly critical) and "Joshua" (same
+  name as the owner; confirm it isn't an insider review before using it).
+- Etsy image #11 (7222461124) was NOT imported: it shows named testimonials
+  (Sarah L., Emily R., Jasmine K., Leah B.) and "Rated 5 stars", which
+  don't match the real reviews. Ask the owner if those are real.
+- The FAQ overrides the "about 5 minutes" answer; 50+ pages takes longer.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:
