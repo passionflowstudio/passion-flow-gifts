@@ -260,7 +260,7 @@ Product page section order (owner, 2026-09-25):
 1. Hero: gallery and reviews on the left; purchase column with the offer
    picker on the right.
 2. BundleUpsell.
-3. AllAccessTeaser: transparent, text left, and a full-height 3×3 `GiftGrid`
+3. AllAccessTeaser: wine gradient card at every width (owner, 2026-09-25), text left, and a full-height 3×3 `GiftGrid`
    right with a white center tile ("This could be *all your gifts.*").
    Stacks with the grid first below 1024px.
 4. FAQ ("Questions? *We've got you.*").
