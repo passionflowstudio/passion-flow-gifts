@@ -82,15 +82,36 @@ const coupleMatchbookReviews: ReviewSummary = {
   ],
 };
 
+// Etsy shows 10 reviews (4.1 average, recency-weighted); only these 4 are
+// visible on the listing. Ask the owner for the rest before adding more.
+const playingCardsReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4382477069/custom-playing-cards-bundle-giftful-for',
+  note: 'Showing 4 of 10 reviews',
+  average: 4.1,
+  count: 10,
+  itemQuality: 4.6,
+  customerService: 4.5,
+  recommendPercent: 80,
+  reviews: [
+    { name: 'Avery', date: '2026-07-22', rating: 5, text: 'Absolutely amazing. Customized it with my own pictures and letters on the cards and it was the perfect gift.' },
+    { name: 'Walter', date: '2026-02-17', rating: 5, text: 'Great template and easy to use!' },
+    { name: 'Leah', date: '2026-02-12', rating: 5, text: 'Wow I’m honestly blown away by how beautiful this turned out! Definitely the best custom playing cards I’ve found so far. 🥹' },
+    { name: 'Julia', date: '2026-02-02', rating: 5, text: 'awesome, aesthetic, creative freedom at large' },
+  ],
+};
+
 const coupleBundleReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
   note: 'Includes reviews of the gifts in this bundle',
-  average: 5.0,
-  count: 16,
+  // (15 × 5.0 matchbook + 1 × 5.0 bundle + 10 × 4.1 playing cards) / 26
+  average: 4.7,
+  count: 26,
   reviews: [
     { name: 'Sydney', date: '2026-06-08', rating: 5, text: 'great quick template for what I needed', product: 'Couple Gift Bundle' },
     ...coupleMatchbookReviews.reviews.map(review => ({ ...review, product: 'Matchbook Poster' })),
+    ...playingCardsReviews.reviews.map(review => ({ ...review, product: 'Playing Card Poster' })),
   ],
 };
 
@@ -103,6 +124,18 @@ const content: Record<string, ProductContent> = {
     reviews: coupleMatchbookReviews,
     faqs: [
       { q: 'What’s included?', a: '3 matchbook poster designs (blush pink, red “The Perfect Match” and blue “How Lucky Are We”), a bonus Anniversary Edition design, your editable Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
+      ...templateFaqs,
+    ],
+  },
+  'playing-cards': {
+    badge: 'Bestseller',
+    tags: ['Ready in 5 min', 'No design skills', 'Print any size'],
+    offerDetail: '6 designs + a bonus design',
+    highlightReview: 0,
+    reviews: playingCardsReviews,
+    faqs: [
+      { q: 'What’s included?', a: '6 playing card poster designs (Lucky Me, Lucky in Love, You Light Up the Room, How Lucky Are We?, I Love You More and a custom message card), a bonus My Favorite Person design, your editable Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
+      { q: 'Can I add our initials?', a: 'Yes. The king and queen cards are made for your initials, and you can change every word on the poster in Canva.' },
       ...templateFaqs,
     ],
   },

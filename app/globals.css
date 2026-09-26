@@ -618,7 +618,7 @@ html:has(.cart-drawer[open]){overflow:hidden}
 .offer-card.is-bundle .offer-image{width:72px;height:72px}
 .offer-text{display:grid;gap:3px;min-width:0}
 .offer-label{font-size:15px;font-weight:700;line-height:1.25}
-.offer-detail{color:#62534e;font-size:12px;line-height:1.35}
+.offer-detail{color:#62534e;font-size:12px;line-height:1.35;text-wrap:balance}
 .offer-includes{color:var(--wine);font-size:11px;font-weight:600;line-height:1.4}
 .offer-price{display:grid;justify-items:end;gap:2px;font-variant-numeric:tabular-nums}
 .offer-price strong{font-size:17px}

@@ -269,6 +269,21 @@ There's no final CTA box; the sticky buy bar covers phones.
 "Reviews for *this gift*" stays on one line (`.heading-inline`).
 **Responsive rule:** verify every UI change at 375, 768, 1024 and 1280px.
 
+Playing Cards page (2026-09-25):
+- Shopify now has 18 Etsy photos plus the video (video second), the title
+  "Custom Playing Card Poster: Editable Canva Template", new
+  description/SEO, and compare-at $29.98.
+- `product-content.ts` has the badge (Bestseller, 580 Etsy orders), tags,
+  offer detail, FAQs and reviews.
+- Etsy shows 10 reviews at 4.1 (item quality 4.6, customer service 4.5, 80%
+  recommend). Only 4 are visible on the listing; the page says "Showing 4 of
+  10". Ask the owner to paste the other 6.
+- The bundle's review summary is now 4.7 across 26 reviews (a weighted
+  combination).
+- Owner's all-time Etsy orders: Matchbook 713, Playing Cards 580, Birthday
+  Photo Book 392, Couple Photo Book 343, Bestie Matchbook 270, BF Birthday
+  Bundle 40, Bestie Playing Cards 25. Shop: 2,815 orders, ~1.8% conversion.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:
