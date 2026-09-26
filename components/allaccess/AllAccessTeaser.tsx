@@ -23,7 +23,7 @@ export async function AllAccessTeaser({ fromProduct }: { fromProduct: string }) 
         <p>Get every Passion Flow gift template for a whole year: couples, birthdays, best friends and every new release.</p>
         <ul>{allAccessPerks.slice(0, 3).map(perk => <li key={perk}><Check size={15} /> {perk}</li>)}</ul>
         <p className="aa-teaser-price">
-          <strong>{formatMoney(plan.price)}</strong> / year <span>· about {perMonth(plan.price)} a month</span>
+          <strong>{formatMoney(plan.price)}</strong> / year <span>· about {perMonth(plan.price)}/month</span>
         </p>
         <AllAccessLink fromProduct={fromProduct} className="button-primary aa-teaser-cta">
           Explore All Access <ArrowRight size={16} />
