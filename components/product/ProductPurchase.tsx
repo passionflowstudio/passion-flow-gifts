@@ -85,7 +85,7 @@ function OfferPicker({ options, selected, onSelect }: { options: PurchaseOption[
             <span className="offer-text">
               <span className="offer-label">{option.label}</span>
               <span className="offer-detail">{option.detail}</span>
-              {option.includes && <span className="offer-includes">{option.includes.join(' · ')}</span>}
+              {option.includes && <span className="offer-includes">{option.includes.join('\u00a0· ')}</span>}
             </span>
             <span className="offer-price">
               <strong>{formatMoney(option.price)}</strong>

@@ -48,6 +48,9 @@ export type ProductContent = {
   highlightReview?: number;
   reviews?: ReviewSummary;
   faqs?: Faq[];
+  // Bundles only: headings for the bundle section. Each is [main words,
+  // italic phrase]; `upsell` shows on product pages, `inside` on the bundle.
+  bundleCopy?: { upsell: [string, string]; upsellText: string; inside: [string, string] };
 };
 
 // Shared answers for every Canva template product.
@@ -219,6 +222,19 @@ const coupleBundleReviews: ReviewSummary = {
   ],
 };
 
+// No bundle reviews yet: the real reviews of the bundle's gifts that are
+// already on the site, each labeled with its gift, under the shop rating.
+const bestFriendBundleReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4474049269/birthday-gift-bundle-for-best-friend',
+  note: 'Selected reviews of the gifts in this bundle',
+  ...shopRating,
+  reviews: [
+    ...bestieMatchbookReviews.reviews.map(review => ({ ...review, product: 'Bestie Matchbook Poster' })),
+    ...birthdayPhotoBookReviews.reviews.map(review => ({ ...review, product: 'Birthday Photo Book' })),
+  ],
+};
+
 const content: Record<string, ProductContent> = {
   'couple-matchbook': {
     badge: 'Bestseller',
@@ -296,6 +312,11 @@ const content: Record<string, ProductContent> = {
     ],
   },
   'couples-gift-bundle': {
+    bundleCopy: {
+      upsell: ['Give them the whole', 'romantic surprise.'],
+      upsellText: 'Add three more keepsakes made from the same memories: wall art, a book they can hold and a bouquet to hand them.',
+      inside: ['Four gifts,', 'one love story.'],
+    },
     badge: 'Best value',
     // Shows the Etsy price ("$18.99 / Save Over 50%").
     hiddenMedia: ['7944361983'],
@@ -307,6 +328,23 @@ const content: Record<string, ProductContent> = {
       ...templateFaqs,
     ],
   },
+};
+
+content['best-friend-birthday-bundle'] = {
+  bundleCopy: {
+    upsell: ['Give her the whole', 'birthday surprise.'],
+    upsellText: 'Add the other three gifts, made from the same photos and memories, for one bundle price.',
+    inside: ['Four gifts,', 'one best friend.'],
+  },
+  badge: 'Best value',
+  tags: ['4 gifts in 1', 'Ready in minutes', 'No design skills'],
+  highlightReview: 0,
+  reviews: bestFriendBundleReviews,
+  faqs: [
+    { q: 'What’s in the bundle?', a: 'Four gifts: a bestie matchbook poster, a playing card poster, a birthday photo book with 40+ page designs and a “The Birthday Times” newspaper bouquet wrap. You get an editable Canva link for each one.' },
+    { q: 'How long does it take to make?', a: 'Each poster takes about 5 minutes. The photo book has more pages to fill, so most people spend under an hour on it.' },
+    ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
+  ],
 };
 
 export const productContent = (slug: string): ProductContent => content[slug] ?? {};

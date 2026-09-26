@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { findBySlug } from '@/lib/catalog';
+import { productContent } from '@/lib/product-content';
 import { formatMoney } from '@/lib/money';
 import { getProduct } from '@/lib/shopify/products';
 import type { Money, Product } from '@/lib/shopify/types';
@@ -45,6 +46,8 @@ export async function BundleUpsell({ bundleSlug, current }: Props) {
   const savings = separateTotal - bundlePrice;
   const showSavings = allPriced && savings > 0;
   const upgradeCost = current ? bundlePrice - Number(current.price.amount) : 0;
+  const copy = productContent(bundleSlug).bundleCopy;
+  const [lead, em] = current ? copy?.upsell ?? ['Make it the', 'complete gift.'] : copy?.inside ?? ['Every gift', 'in this bundle.'];
 
   return (
     <section className="bundle-upsell" aria-labelledby="bundle-upsell-title">
@@ -52,10 +55,10 @@ export async function BundleUpsell({ bundleSlug, current }: Props) {
       <div className="upsell-head">
         <span className="eyebrow">{current ? 'MAKE IT THE COMPLETE GIFT' : 'WHAT’S INSIDE'}</span>
         <h2 id="bundle-upsell-title">
-          {current ? <>Give them the whole <em>romantic surprise.</em></> : <>Four gifts, <em>one love story.</em></>}
+          {lead} <em>{em}</em>
         </h2>
-        <p>{current
-          ? 'Add three more keepsakes made from the same memories: wall art, a book they can hold and a bouquet to hand them.'
+        <p>{current && copy
+          ? copy.upsellText
           : 'Each gift is its own editable Canva template, ready in minutes with your photos.'}</p>
       </div>
 

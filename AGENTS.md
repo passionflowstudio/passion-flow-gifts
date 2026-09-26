@@ -76,6 +76,9 @@ Products (IDs are stable; prices live in Shopify):
 | couples-gift-bundle | couple-gift-bundle-4-in-1-romantic-digital-gift-set | 11175336804519 | 51331316088999 | Active, $24.99, compare-at $47.96 (4 × $11.99) |
 | bestie-matchbook | best-friend-matchbook-poster-custom-birthday-gift | 11187615006887 | 51395163390119 | Active, $11.99, compare-at $29.98 (one product, 3 designs) |
 | birthday-photo-book | best-friend-photo-book-custom-birthday-keepsake | 11187614810279 | 51395162374311 | Active, $11.99, compare-at $29.98 |
+| best-friend-birthday-bundle | best-friend-birthday-gift-bundle-4-in-1 | 11193810124967 | 51423523307687 | Active, $24.99, compare-at $47.96 (4 × $11.99) |
+| bestie-playing-cards | bestie-playing-cards-custom-photo-gift (planned) | not created yet | | Planned (bundle tile uses a local image) |
+| bestie-newspaper | bestie-newspaper-custom-birthday-gift (planned) | not created yet | | Planned (bundle tile uses a local image) |
 | all-access (planned) | `passion-flow-studio-all-access` | not created yet | | Planned |
 
 Matchbook and bundle media (14 or 15 images plus a video each) were imported
@@ -339,8 +342,26 @@ Bestie Matchbook Poster (2026-09-25):
 - Reviews: `bestieMatchbookReviews` holds the pink listing's real stats
   (5.0 from 8 reviews, 5.0/5.0/100%), all 8 reviews, with the note
   "Reviews of the Cute Pink design".
-- Next: create the Best Friend Birthday Bundle (Etsy 4474049269) and set
-  `bundle` on bestie-matchbook and birthday-photo-book.
+
+Best Friend Birthday Bundle (2026-09-25):
+- 4 gifts (the Etsy photos show 4, though the Etsy copy says 3-in-1):
+  Bestie Matchbook Poster, Playing Card Poster, Birthday Photo Book and the
+  "The Birthday Times" Newspaper Bouquet.
+- Shopify: created and ACTIVE, published to Online Store and Copilot like
+  the others. 14 Etsy photos plus the video (second), $24.99, compare-at
+  $47.96, new description/SEO.
+- Etsy images #2 and #15 were not imported because they show the Etsy
+  price ($18.99).
+- Catalog: `bundle: 'best-friend-birthday-bundle'` is set on bestie-matchbook,
+  bestie-playing-cards, birthday-photo-book and bestie-newspaper.
+- Playing cards and newspaper aren't in Shopify yet. Their catalog entries
+  use planned handles plus local `fallbackImage`s, and their tiles read
+  "Included". Once both are live, the savings line shows automatically. If
+  the real handle differs from the planned one, update `lib/catalog.ts`.
+- Bundle section headings now come from `bundleCopy` in `product-content.ts`
+  per bundle (couple copy unchanged).
+- Reviews: no bundle reviews exist, so it shows the labeled bestie
+  matchbook and birthday photo book reviews under the 4.9 shop rating.
 
 ## 9. Next steps (in order)
 
