@@ -28,7 +28,7 @@ export function ProductReviews({ summary }: { summary: ReviewSummary }) {
     <section className="reviews" id="reviews" aria-labelledby="reviews-title">
       <div className="reviews-head">
         <h2 id="reviews-title" className="heading-inline">{summary.about === 'shop' ? <>Reviews from <em>our shop</em></> : <>Reviews for <em>this gift</em></>}</h2>
-        <p className="reviews-source"><BadgeCheck size={15} /> Verified purchases from our {summary.source} shop{summary.note ? ` · ${summary.note}` : ''}</p>
+        <p className="reviews-source"><BadgeCheck size={15} /> Verified purchases from our {summary.source} shop{summary.note ? `\u00a0· ${summary.note}` : ''}</p>
       </div>
 
       <div className="reviews-summary">
