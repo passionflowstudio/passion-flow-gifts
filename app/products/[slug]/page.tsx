@@ -3,6 +3,7 @@ import type { GalleryMedia, Product } from '@/lib/shopify/types';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { AllAccessTeaser } from '@/components/allaccess/AllAccessTeaser';
 import { BundleUpsell } from '@/components/product/BundleUpsell';
+import { ProductDescription } from '@/components/product/ProductDescription';
 import { ProductFaq } from '@/components/product/ProductFaq';
 import { OfferGallery } from '@/components/product/OfferGallery';
 import { OfferSelectionProvider } from '@/components/product/OfferSelection';
@@ -75,6 +76,14 @@ async function bundleOption(entry: CatalogEntry): Promise<{ option: PurchaseOpti
     title: bundle.title,
     badge: productContent(bundleEntry.slug).badge,
   };
+}
+
+// Preview = everything before the "What's included" section (hook, promise,
+// benefits); the rest sits behind "Learn more about this item".
+function splitDescription(html: string) {
+  const match = html.match(/<p>\s*<strong>\s*What(?:'|’|&#39;|&rsquo;)s included/i);
+  if (!match || match.index === undefined) return { previewHtml: html, moreHtml: '' };
+  return { previewHtml: html.slice(0, match.index), moreHtml: html.slice(match.index) };
 }
 
 // "Main title: Subtitle" renders as two lines, each kept on a single line.
@@ -175,7 +184,7 @@ export default async function ProductPage({ params }: Props) {
           {reviews && extra.highlightReview !== undefined && reviews.reviews[extra.highlightReview] && (
             <ReviewHighlight review={reviews.reviews[extra.highlightReview]} />
           )}
-          <div className="product-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+          <ProductDescription slug={entry.slug} {...splitDescription(product.descriptionHtml)} />
         </div>
         {reviews && (
           <div className="product-reviews-area">

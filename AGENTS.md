@@ -267,6 +267,13 @@ Product page section order (owner, 2026-09-25):
 
 There's no final CTA box; the sticky buy bar covers phones.
 "Reviews for *this gift*" stays on one line (`.heading-inline`).
+**Collapsible description (owner, 2026-09-25):** the Shopify description
+splits at the "What's included" heading.
+- The preview (hook, promise, story, "Why couples love it") shows, with a
+  fade and an Etsy-style "Learn more about this item" toggle.
+- The details stay in the DOM for SEO.
+- Opens are tracked as `description_expanded`.
+- Keep every description's "What's included" heading so the split works.
 **Responsive rule:** verify every UI change at 375, 768, 1024 and 1280px.
 
 Playing Cards page (2026-09-25):

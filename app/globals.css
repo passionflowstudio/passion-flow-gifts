@@ -338,10 +338,17 @@ html:has(.cart-drawer[open]){overflow:hidden}
 .product-description{padding-top:26px;border-top:1px solid rgba(115,52,59,.12);color:#4d3f3a;font-size:14px;line-height:1.75}
 .product-description p{margin:0 0 14px}
 .product-description ul,.product-description ol{margin:0 0 18px;padding-left:20px}
+/* Collapsed description: soft fade into the 'Learn more about this item' toggle (Etsy-style). */
+.product-description.is-collapsed>div:first-child{position:relative}
+.product-description.is-collapsed>div:first-child:after{content:'';position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,rgba(250,245,239,0),var(--cream));pointer-events:none}
+.description-toggle{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:4px;padding:14px 0;border:0;border-top:1px solid rgba(115,52,59,.12);background:none;color:var(--espresso);font-size:14px;font-weight:700;cursor:pointer}
+.description-toggle:hover{color:var(--wine)}
+.description-toggle svg{transition:transform .25s}
+.description-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
 .product-description li{margin-bottom:6px}
-.product-description>p:first-child strong{display:block;font-family:var(--font-playfair),Georgia,serif;font-size:min(32px,7.4cqi);font-weight:500;line-height:1.1;letter-spacing:-.045em;color:var(--espresso);text-wrap:balance}
+.product-description>div:first-child>p:first-child strong{display:block;font-family:var(--font-playfair),Georgia,serif;font-size:min(32px,7.4cqi);font-weight:500;line-height:1.1;letter-spacing:-.045em;color:var(--espresso);text-wrap:balance}
 /* Italic part of the hook (marked with <em> in Shopify) gets its own wine-italic line, like the title. */
-.product-description>p:first-child strong em{display:block;color:var(--wine);font-family:inherit;font-style:italic;font-weight:400}
+.product-description>div:first-child>p:first-child strong em{display:block;color:var(--wine);font-family:inherit;font-style:italic;font-weight:400}
 
 .gallery-badge{position:absolute;top:-14px;left:-14px;z-index:3;display:inline-flex;align-items:center;gap:7px;padding:9px 16px 9px 13px;border-radius:999px;background:var(--brand-gradient);color:#fff;font-size:14px;font-weight:600;letter-spacing:.01em;box-shadow:0 10px 22px rgba(115,52,59,.28)}
 

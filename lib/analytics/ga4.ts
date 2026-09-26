@@ -31,6 +31,8 @@ export const ga4Adapter: AnalyticsAdapter = {
         return gtag('event', 'upsell_viewed', { offer: event.offer, from_product: event.fromProduct });
       case 'upsell_clicked':
         return gtag('event', 'upsell_clicked', { offer: event.offer, from_product: event.fromProduct, action: event.action });
+      case 'description_expanded':
+        return gtag('event', 'description_expanded', { from_product: event.fromProduct });
       case 'checkout_started':
         return gtag('event', 'begin_checkout', { currency: event.currency, value: event.value, items: event.items.map(toGaItem), method: event.source });
     }
