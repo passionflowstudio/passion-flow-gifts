@@ -388,6 +388,16 @@ hero "For Invites" link and the nav link are off via `showInvites = false`
 in `lib/site-config.ts`. They only linked to Etsy and aren't being
 advertised. Bring them back once invites are sold on this site.
 
+Upgrade codes for the PDFs (owner, 2026-09-25):
+- `COUPLEUPGRADE`: $11.99 off the Couple Gift Bundle. `BESTIEUPGRADE`:
+  $11.99 off the Best Friend Birthday Bundle.
+- Both are limited to the "Past customers" segment (number_of_orders >= 1),
+  work once per customer, don't combine with other codes and never expire.
+- They're for the "get the other 3 gifts for $13 more" block in each
+  single-gift PDF. Bundle PDFs only promote All Access.
+- PDF links must use passionflowstudio.com URLs with
+  `utm_source=pdf&utm_medium=download&utm_campaign=<slug>`.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:
