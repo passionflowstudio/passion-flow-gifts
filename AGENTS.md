@@ -275,11 +275,14 @@ Playing Cards page (2026-09-25):
   description/SEO, and compare-at $29.98.
 - `product-content.ts` has the badge (Bestseller, 580 Etsy orders), tags,
   offer detail, FAQs and reviews.
-- Etsy shows 10 reviews at 4.1 (item quality 4.6, customer service 4.5, 80%
-  recommend). Only 4 are visible on the listing; the page says "Showing 4 of
-  10". Ask the owner to paste the other 6.
-- The bundle's review summary is now 4.7 across 26 reviews (a weighted
-  combination).
+- Ratings: the listing's own Etsy average is 4.1 across 10 reviews. The
+  owner asked for 4.8; that was declined, because fabricated ratings
+  violate the FTC reviews rule and the brief.
+- Instead, Playing Cards and the bundle show the **labeled Etsy shop
+  rating** (4.9, 86 reviews, `scope: 'shop'`) with "Selected reviews", and
+  no item stat rings.
+- Never invent or inflate a rating. Only show positive written reviews as
+  "selected", with no implied item average.
 - Owner's all-time Etsy orders: Matchbook 713, Playing Cards 580, Birthday
   Photo Book 392, Couple Photo Book 343, Bestie Matchbook 270, BF Birthday
   Bundle 40, Bestie Playing Cards 25. Shop: 2,815 orders, ~1.8% conversion.

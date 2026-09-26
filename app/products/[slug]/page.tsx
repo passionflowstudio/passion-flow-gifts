@@ -153,7 +153,7 @@ export default async function ProductPage({ params }: Props) {
           <ProductTitle title={product.title} />
           <a className="product-byline" href={reviews ? '#reviews' : '/'}>
             <span className="product-byline-shop">{brand.name}</span>
-            {reviews && <><Stars rating={reviews.average} size={15} /><span className="product-byline-count">({reviews.count})</span></>}
+            {reviews && <><Stars rating={reviews.average} size={15} /><span className="product-byline-count">{reviews.scope === 'shop' ? `${reviews.average.toFixed(1)} shop rating` : `(${reviews.count})`}</span></>}
           </a>
           {extra.tags && <ul className="product-tags">{extra.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>}
           <ProductPurchase

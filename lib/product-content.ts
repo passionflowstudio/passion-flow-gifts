@@ -15,6 +15,9 @@ export type Review = {
 
 export type ReviewSummary = {
   source: 'Etsy';
+  // 'item' = this listing's own rating; 'shop' = the Etsy shop-wide rating,
+  // always labeled as such (used when the listing has few written reviews).
+  scope?: 'item' | 'shop';
   // Shown under the heading, e.g. to explain reviews are for gifts in a bundle.
   note?: string;
   sourceUrl: string;
@@ -82,17 +85,16 @@ const coupleMatchbookReviews: ReviewSummary = {
   ],
 };
 
-// Etsy shows 10 reviews (4.1 average, recency-weighted); only these 4 are
-// visible on the listing. Ask the owner for the rest before adding more.
+// Shows the shop-wide Etsy rating (4.9 from 86 reviews), clearly labeled, with
+// selected written reviews. The listing's own average is 4.1 — never show a
+// made-up item rating.
+const shopRating = { scope: 'shop' as const, average: 4.9, count: 86 };
+
 const playingCardsReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4382477069/custom-playing-cards-bundle-giftful-for',
-  note: 'Showing 4 of 10 reviews',
-  average: 4.1,
-  count: 10,
-  itemQuality: 4.6,
-  customerService: 4.5,
-  recommendPercent: 80,
+  note: 'Selected reviews',
+  ...shopRating,
   reviews: [
     { name: 'Avery', date: '2026-07-22', rating: 5, text: 'Absolutely amazing. Customized it with my own pictures and letters on the cards and it was the perfect gift.' },
     { name: 'Walter', date: '2026-02-17', rating: 5, text: 'Great template and easy to use!' },
@@ -104,10 +106,8 @@ const playingCardsReviews: ReviewSummary = {
 const coupleBundleReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
-  note: 'Includes reviews of the gifts in this bundle',
-  // (15 × 5.0 matchbook + 1 × 5.0 bundle + 10 × 4.1 playing cards) / 26
-  average: 4.7,
-  count: 26,
+  note: 'Selected reviews of the gifts in this bundle',
+  ...shopRating,
   reviews: [
     { name: 'Sydney', date: '2026-06-08', rating: 5, text: 'great quick template for what I needed', product: 'Couple Gift Bundle' },
     ...coupleMatchbookReviews.reviews.map(review => ({ ...review, product: 'Matchbook Poster' })),

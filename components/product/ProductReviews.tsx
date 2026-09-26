@@ -36,7 +36,7 @@ export function ProductReviews({ summary }: { summary: ReviewSummary }) {
           <strong>{summary.average.toFixed(1)}</strong>
           <div>
             <Stars rating={summary.average} size={18} />
-            <span>{summary.count} reviews</span>
+            <span>{summary.scope === 'shop' ? `Shop rating · ${summary.count} reviews` : `${summary.count} reviews`}</span>
           </div>
         </div>
         <div className="review-stats">
