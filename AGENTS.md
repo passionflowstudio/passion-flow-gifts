@@ -300,11 +300,10 @@ Couple Photo Book page (2026-09-25):
   $29.98.
 - Honest item stats: 4.9 average, 17 reviews, item quality 4.9, customer
   service 5.0, 100% recommend.
-- 15 selected reviews. Omitted: "Bob" (mildly critical) and "Joshua" (same
-  name as the owner; confirm it isn't an insider review before using it).
-- Etsy image #11 (7222461124) was NOT imported: it shows named testimonials
-  (Sarah L., Emily R., Jasmine K., Leah B.) and "Rated 5 stars", which
-  don't match the real reviews. Ask the owner if those are real.
+- 16 selected reviews. Omitted: "Bob" (mildly critical). "Joshua" is a
+  real customer (owner confirmed) and is included.
+- Etsy image #11 (7222461124, testimonial graphic) is imported at position
+  12; the owner confirmed the testimonials are real.
 - The FAQ overrides the "about 5 minutes" answer; 50+ pages takes longer.
 
 Couple Newspaper Print (2026-09-25):
@@ -323,9 +322,10 @@ Best Friend Birthday Photo Book (2026-09-25):
   Birthday Photo Book: Editable Canva Template", new description/SEO,
   compare-at $29.98.
 - Honest stats: 4.8 average, 10 reviews, item quality 4.9, customer service
-  4.9, 100% recommend. 6 selected reviews.
-- Etsy image #11 (7287883327-style testimonial graphic: Emily R., Tiana A.,
-  Sophie L., Jenna M.) was not imported; ask the owner.
+  4.9, 100% recommend. 7 selected reviews, including Joshua (a real
+  customer, owner confirmed).
+- Etsy image #11 (7294756310, testimonial graphic) is imported at position
+  12; the owner confirmed the testimonials are real.
 - No bundle yet: there's no best-friend bundle in Shopify.
 
 Bestie Matchbook Poster (2026-09-25):

@@ -111,7 +111,7 @@ const playingCardsReviews: ReviewSummary = {
 };
 
 // Etsy listing stats: 4.9 average, 17 reviews. Shown as selected reviews
-// (one mildly critical review and one pending owner confirmation omitted).
+// (one mildly critical review omitted).
 const couplePhotoBookReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4348775091/couple-photo-book-o-custom-gifts',
@@ -137,6 +137,7 @@ const couplePhotoBookReviews: ReviewSummary = {
     { name: 'phobs', date: '2025-09-22', rating: 5, text: 'such a cute and fun template - super fun to fill out:)' },
     { name: 'HoopsHaven', date: '2025-09-06', rating: 5, text: 'so easy to use. very lovely' },
     { name: 'Nico', date: '2025-09-01', rating: 5, text: 'very cute and easy to customise' },
+    { name: 'Joshua', date: '2025-08-29', rating: 5, text: 'I really liked the photo book template. It’s super easy to edit in Canva and can even be printed at a reasonable price.' },
   ],
 };
 
@@ -160,8 +161,8 @@ const shopReviews: ReviewSummary = {
 };
 
 // Etsy listing stats: 4.8 average, 10 reviews. Selected reviews shown
-// (omitted: a download complaint, an untranslated/unclear one, an empty
-// one, and "Joshua" pending owner confirmation).
+// (omitted: a download complaint, an untranslated/unclear one, and an empty
+// one).
 const birthdayPhotoBookReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4355300090/bestfriend-photo-book-canva-photobook',
@@ -178,6 +179,7 @@ const birthdayPhotoBookReviews: ReviewSummary = {
     { name: 'Lindsay', date: '2025-10-14', rating: 5, text: 'It matched the description perfectly! Super cute and my friend loved it', response: 'Yayy I’m glad your friend loved it!🩷🥺' },
     { name: 'Tia', date: '2025-10-06', rating: 5, text: 'great gift for friend for xmas' },
     { name: 'HoopsHaven', date: '2025-09-06', rating: 5, text: 'bought this for my best friend of 10 years. she loved it.' },
+    { name: 'Joshua', date: '2025-08-29', rating: 5, text: 'This birthday photo book turned out perfect! The pages are already beautifully designed, so all I had to do was drop in my pictures. My gf cried when she got it.' },
   ],
 };
 
