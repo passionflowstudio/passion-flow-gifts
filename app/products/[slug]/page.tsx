@@ -11,6 +11,8 @@ import { StickyBuyBar } from '@/components/product/StickyBuyBar';
 import { ProductPurchase, type PurchaseOption } from '@/components/product/ProductPurchase';
 import { ReviewHighlight } from '@/components/product/ReviewHighlight';
 import { ProductReviews } from '@/components/product/ProductReviews';
+import { SiteReviews } from '@/components/product/SiteReviews';
+import { getSiteReviews } from '@/lib/judgeme';
 import { Stars } from '@/components/product/Stars';
 import { ProductViewTracker } from '@/components/product/ProductViewTracker';
 import { findByHandle, findBySlug, type CatalogEntry } from '@/lib/catalog';
@@ -113,7 +115,7 @@ export default async function ProductPage({ params }: Props) {
   if (!variant) notFound();
 
   const extra = productContent(entry.slug);
-  const upgrade = await bundleOption(entry);
+  const [upgrade, siteReviews] = await Promise.all([bundleOption(entry), getSiteReviews(product.handle)]);
   const reviews = extra.reviews;
 
   const item = {
@@ -186,9 +188,10 @@ export default async function ProductPage({ params }: Props) {
           )}
           <ProductDescription slug={entry.slug} {...splitDescription(product.descriptionHtml)} />
         </div>
-        {reviews && (
+        {(siteReviews || reviews) && (
           <div className="product-reviews-area">
-            <ProductReviews summary={reviews} />
+            {siteReviews && <SiteReviews data={siteReviews} slug={entry.slug} />}
+            {reviews && <ProductReviews summary={reviews} />}
           </div>
         )}
       </section>

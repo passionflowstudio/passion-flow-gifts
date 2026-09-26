@@ -398,6 +398,22 @@ Upgrade codes for the PDFs (owner, 2026-09-25):
 - PDF links must use passionflowstudio.com URLs with
   `utm_source=pdf&utm_medium=download&utm_campaign=<slug>`.
 
+Judge.me reviews (2026-09-25, free plan, installed by owner):
+- `lib/judgeme.ts` reads reviews with the **public** widget token (safe to
+  ship). Never use the private token client-side.
+- Product pages show "Reviews from *our website*" (`SiteReviews`) above the
+  Etsy reviews, only once the product has at least one Judge.me review. The
+  two ratings are never merged.
+- `/review` (noindex) is the stable link for every PDF, with
+  `?product=<slug>` to preselect a gift. The form posts to `/api/review`
+  (validation, honeypot, 5/hour per IP), which forwards to Judge.me's
+  public `POST /reviews`. Judge.me marks a review verified when the email
+  matches an order.
+- Reviews created this way can't be deleted, only hidden (marked as spam) in
+  Judge.me. Don't send test reviews casually.
+- Owner: keep the free plan (don't start the Awesome trial). Set review
+  requests to about 3 days after fulfillment and add the logo to the emails.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:
