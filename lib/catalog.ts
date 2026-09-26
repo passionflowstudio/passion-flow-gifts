@@ -24,7 +24,7 @@ export const catalog: CatalogEntry[] = [
   { slug: 'couple-newspaper', name: 'Newspaper Print', handle: 'couple-newspaper-custom-printable-newspaper-print', kind: 'product', collections: ['couples'], bundle: 'couples-gift-bundle' },
   { slug: 'couples-gift-bundle', name: 'Couple Gift Bundle', handle: 'couple-gift-bundle-4-in-1-romantic-digital-gift-set', kind: 'bundle', collections: ['couples'], includes: ['couple-matchbook', 'playing-cards', 'couple-photo-book', 'couple-newspaper'] },
   { slug: 'bestie-matchbook', name: 'Bestie Matchbook Poster', handle: 'best-friend-matchbook-poster-custom-birthday-gift', kind: 'product', collections: ['best-friends', 'birthdays'], bundle: 'best-friend-birthday-bundle' },
-  { slug: 'bestie-playing-cards', name: 'Playing Card Poster', handle: 'bestie-playing-cards-custom-photo-gift', fallbackImage: '/products/bestie-playing-cards.jpg', kind: 'product', collections: ['best-friends', 'birthdays'], bundle: 'best-friend-birthday-bundle' },
+  { slug: 'bestie-playing-cards', name: 'Playing Card Poster', handle: 'bestie-playing-cards-custom-photo-gift', kind: 'product', collections: ['best-friends', 'birthdays'], bundle: 'best-friend-birthday-bundle' },
   { slug: 'birthday-photo-book', name: 'Birthday Photo Book', handle: 'best-friend-photo-book-custom-birthday-keepsake', kind: 'product', collections: ['best-friends', 'birthdays'], bundle: 'best-friend-birthday-bundle' },
   // Not in Shopify yet: the bundle tile uses the local image and reads "Included".
   { slug: 'bestie-newspaper', name: 'Newspaper Bouquet', handle: 'bestie-newspaper-custom-birthday-gift', fallbackImage: '/products/bestie-newspaper.jpg', kind: 'product', collections: ['best-friends', 'birthdays'], bundle: 'best-friend-birthday-bundle' },

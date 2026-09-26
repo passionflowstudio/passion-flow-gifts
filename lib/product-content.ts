@@ -222,6 +222,21 @@ const coupleBundleReviews: ReviewSummary = {
   ],
 };
 
+// The listing has one review (5.0). It's shown first, then real reviews of
+// our other best friend gifts, each labeled, under the shop rating.
+const bestiePlayingCardsReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4445462919/bestie-custom-playing-cards-gifts-for',
+  note: 'Selected reviews of our best friend gifts',
+  about: 'shop',
+  ...shopRating,
+  reviews: [
+    { name: 'Megan', date: '2026-06-10', rating: 5, text: 'The download was so easy to edit and drop my photos into. I was also able to edit the middle card to say what I wanted which was great!', product: 'Bestie Playing Card Poster' },
+    ...['Kristen', 'Donna', 'Chloe'].map(name => ({ ...bestieMatchbookReviews.reviews.find(review => review.name === name)!, product: 'Bestie Matchbook Poster' })),
+    ...['Clare', 'Lindsay', 'HoopsHaven'].map(name => ({ ...birthdayPhotoBookReviews.reviews.find(review => review.name === name)!, product: 'Birthday Photo Book' })),
+  ],
+};
+
 // No bundle reviews yet: the real reviews of the bundle's gifts that are
 // already on the site, each labeled with its gift, under the shop rating.
 const bestFriendBundleReviews: ReviewSummary = {
@@ -328,6 +343,18 @@ const content: Record<string, ProductContent> = {
       ...templateFaqs,
     ],
   },
+};
+
+content['bestie-playing-cards'] = {
+  tags: ['3 designs', 'Ready in 5 min', 'Print any size'],
+  offerDetail: '3 designs + editable center card',
+  highlightReview: 0,
+  reviews: bestiePlayingCardsReviews,
+  faqs: [
+    { q: 'What’s included?', a: '3 bestie playing card poster designs (“Lucky to Have a Friend Like You”, “Nobody Gets Me Like You” and “How Lucky Are We”), your editable Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
+    { q: 'Can I change the middle card?', a: 'Yes. Keep our message or type your own words, a nickname or an inside joke.' },
+    ...templateFaqs,
+  ],
 };
 
 content['best-friend-birthday-bundle'] = {

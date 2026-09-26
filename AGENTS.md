@@ -77,7 +77,7 @@ Products (IDs are stable; prices live in Shopify):
 | bestie-matchbook | best-friend-matchbook-poster-custom-birthday-gift | 11187615006887 | 51395163390119 | Active, $11.99, compare-at $29.98 (one product, 3 designs) |
 | birthday-photo-book | best-friend-photo-book-custom-birthday-keepsake | 11187614810279 | 51395162374311 | Active, $11.99, compare-at $29.98 |
 | best-friend-birthday-bundle | best-friend-birthday-gift-bundle-4-in-1 | 11193810124967 | 51423523307687 | Active, $24.99, compare-at $47.96 (4 × $11.99) |
-| bestie-playing-cards | bestie-playing-cards-custom-photo-gift (planned) | not created yet | | Planned (bundle tile uses a local image) |
+| bestie-playing-cards | bestie-playing-cards-custom-photo-gift | 11193811632295 | 51423542608039 | Active, $11.99, compare-at $29.98 |
 | bestie-newspaper | bestie-newspaper-custom-birthday-gift (planned) | not created yet | | Planned (bundle tile uses a local image) |
 | all-access (planned) | `passion-flow-studio-all-access` | not created yet | | Planned |
 
@@ -354,14 +354,25 @@ Best Friend Birthday Bundle (2026-09-25):
   price ($18.99).
 - Catalog: `bundle: 'best-friend-birthday-bundle'` is set on bestie-matchbook,
   bestie-playing-cards, birthday-photo-book and bestie-newspaper.
-- Playing cards and newspaper aren't in Shopify yet. Their catalog entries
-  use planned handles plus local `fallbackImage`s, and their tiles read
-  "Included". Once both are live, the savings line shows automatically. If
-  the real handle differs from the planned one, update `lib/catalog.ts`.
+- The newspaper isn't in Shopify yet. Its catalog entry uses a planned
+  handle plus a local `fallbackImage`, and its tile reads "Included". Once
+  it's live, the savings line shows automatically. If the real handle
+  differs from the planned one, update `lib/catalog.ts`.
 - Bundle section headings now come from `bundleCopy` in `product-content.ts`
   per bundle (couple copy unchanged).
 - Reviews: no bundle reviews exist, so it shows the labeled bestie
   matchbook and birthday photo book reviews under the 4.9 shop rating.
+
+Bestie Playing Card Poster (2026-09-25):
+- Shopify: created and ACTIVE. 16 Etsy photos plus the video (second),
+  title "Bestie Playing Card Poster: Editable Canva Template", new
+  description (hook "Want to show your bestie / *how lucky you are?*"), SEO,
+  $11.99, compare-at $29.98.
+- 3 designs: "Lucky to Have a Friend Like You", "Nobody Gets Me Like You"
+  and "How Lucky Are We". 5 sizes.
+- Reviews: the listing has 1 review (Megan, 5.0). The page shows the 4.9 shop
+  rating under "Reviews from our shop". Megan's review comes first, then
+  labeled best-friend gift reviews.
 
 ## 9. Next steps (in order)
 
