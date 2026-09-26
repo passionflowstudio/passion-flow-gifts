@@ -27,6 +27,11 @@ export const saleBanner = {
   ariaLabel: 'Digital gift sale, 60 percent off, sale ends tonight',
 };
 
+// Invitation websites are hidden until they're sold on this site (they
+// only linked to Etsy). Set to true to bring back the homepage section and
+// the nav link.
+export const showInvites = false;
+
 export const etsy = {
   shop: 'https://www.etsy.com/shop/passionflowstudios/?etsrc=sdt',
   couplesSection: 'https://www.etsy.com/shop/passionflowstudios/?etsrc=sdt&section_id=52763868',
@@ -38,7 +43,7 @@ export const nav: { label: string; href: string }[] = [
   { label: 'For Couples', href: '/#couples' },
   { label: 'For Friends', href: '/#friends' },
   { label: 'Bundles', href: '/#bundles' },
-  { label: 'For Invites', href: '/#invites' },
+  ...(showInvites ? [{ label: 'For Invites', href: '/#invites' }] : []),
   { label: 'About', href: '/#about' },
 ];
 

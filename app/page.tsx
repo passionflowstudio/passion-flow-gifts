@@ -5,7 +5,7 @@ import { ProductCard } from '@/components/home/ProductCard';
 import { GiftGrid } from '@/components/site/GiftGrid';
 import { SignupForm } from '@/components/site/SignupForm';
 import { bundles, couples, friends, invites } from '@/lib/home-content';
-import { etsy, socialProof } from '@/lib/site-config';
+import { etsy, showInvites, socialProof } from '@/lib/site-config';
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -31,7 +31,7 @@ export default function Home() {
           <h1><span className="headline-line">Meaningful gifts</span><em><span className="headline-line">made from</span><span className="headline-line">your memories.</span></em></h1>
           <p>Turn your favorite photos, moments, and inside jokes into personalized gifts they’ll actually want to keep.</p>
           <a className="button-primary" href={etsy.shop} target="_blank" rel="noreferrer">Shop gifts <ArrowRight size={18} /></a>
-          <div className="hero-links"><Link href="#couples">For Couples</Link><i /><Link href="#friends">For Friends</Link><i /><Link href="#invites">For Invites</Link></div>
+          <div className="hero-links"><Link href="#couples">For Couples</Link><i /><Link href="#friends">For Friends</Link>{showInvites && <><i /><Link href="#invites">For Invites</Link></>}</div>
         </div>
         <div className="hero-gallery" aria-label="A gallery of personalized Passion Flow gifts">
           <GiftGrid lead="This could be" message="your gift." priority />
@@ -68,7 +68,7 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="invites" id="invites">
+      {showInvites && <section className="invites" id="invites">
         <div className="invite-copy reveal"><span className="eyebrow">MAKE THE MOMENT START BEFORE THE PARTY</span><h2><span className="headline-line">Make the invitation</span><em><span className="headline-line">part of the experience.</span></em></h2><p>Interactive birthday and wedding invitations your guests can tap through, with photos, music, RSVP, directions, and all the details.</p><a className="button-primary" href={etsy.invites} target="_blank" rel="noreferrer">Explore all invites <ArrowRight size={17} /></a></div>
         <div className="invite-gallery">
           {invites.map((invite, index) => (
@@ -79,7 +79,7 @@ export default function Home() {
             </a>
           ))}
         </div>
-      </section>
+      </section>}
 
       <section className="about" id="about">
         <div className="about-copy reveal"><span className="eyebrow">WHY CUSTOMERS CHOOSE US</span><h2><span className="headline-line">Made for the moments</span><em><span className="headline-line">you don’t want to forget.</span></em></h2><p>Passion Flow Studio turns the photos, stories, and little details you already love into meaningful gifts that feel completely personal.</p><a className="button-primary about-button" href={etsy.shop} target="_blank" rel="noreferrer">See the whole shop <ArrowRight size={17} /></a></div>

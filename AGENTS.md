@@ -383,6 +383,11 @@ Birthday Newspaper Print (2026-09-25):
   4.9 shop rating.
 - All 7 couple and best-friend product pages are now built.
 
+Invites hidden (owner, 2026-09-25): the homepage invitations section, the
+hero "For Invites" link and the nav link are off via `showInvites = false`
+in `lib/site-config.ts`. They only linked to Etsy and aren't being
+advertised. Bring them back once invites are sold on this site.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:
