@@ -434,8 +434,9 @@ Birthday Newspaper Print (2026-09-25):
 
 ## 10. Owner to-do list (blocks real sales)
 
-- [ ] **Payments:** checkout currently says "This store can't accept
-      payments right now." Set up Shopify Payments.
+- [~] **Payments:** the owner set up Shopify Payments on 2026-09-25;
+      approval may take about a day. Re-test checkout after that.
+- [x] All 10 products are digital: `requiresShipping: false` (2026-09-25).
 - [ ] Install **Digital Downloads** and attach each product's PDF, which
       holds the Canva link and tutorial.
 - [ ] Install **Shopify Subscriptions** and create the All Access product
