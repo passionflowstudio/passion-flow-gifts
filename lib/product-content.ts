@@ -181,6 +181,29 @@ const birthdayPhotoBookReviews: ReviewSummary = {
   ],
 };
 
+// Reviews come from the single Cute Pink listing (5.0, 8 reviews). Cute Pink
+// is one of the 3 designs in this product, so they're labeled as such.
+const bestieMatchbookReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4435093798/bestfriend-matchbook-art-personable-bff',
+  note: 'Reviews of the Cute Pink design',
+  average: 5.0,
+  count: 8,
+  itemQuality: 5.0,
+  customerService: 5.0,
+  recommendPercent: 100,
+  reviews: [
+    { name: 'Mabys', date: '2026-06-25', rating: 5, text: 'in love with it, made it for my best friend for her birthday!', response: 'yayy so glad! we hope your best friend loved her matchbox poster gift:)' },
+    { name: 'Donna', date: '2026-09-16', rating: 5, text: 'Very easy to do. Beautiful and a great price too! Thank you' },
+    { name: 'Chloe', date: '2026-08-27', rating: 5, text: 'Good quality & so cute' },
+    { name: 'Kristen', date: '2026-08-20', rating: 5, text: 'SO cute and perfect for a friends bday gift' },
+    { name: 'Carly', date: '2026-08-04', rating: 5, text: 'Cute and easy to use!' },
+    { name: 'Lisa', date: '2026-07-18', rating: 5, text: 'Easy to create, top-notch' },
+    { name: 'Paige', date: '2026-07-10', rating: 5, text: 'It was easy to edit! Loved it!' },
+    { name: 'Megan', date: '2026-04-07', rating: 5, text: 'So easy to add my photos and rearrange things if I want to. This is incredible, I love it! It allows you to download it right when you order it, and it includes a step-by-step guide on how to get it into Canva and use it.' },
+  ],
+};
+
 const coupleBundleReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
@@ -254,6 +277,19 @@ const content: Record<string, ProductContent> = {
       { q: 'Can I print it as a real book?', a: 'Yes. Order it as a printed photo book through Canva Print, or download a PDF and take it to any local print shop. You can also share it digitally.' },
       { q: 'Do I have to use every page?', a: 'No. Pick your favorite pages, reorder them and skip the rest.' },
       { q: 'How long does it take to make?', a: 'It depends on how many pages you fill. Every page is already designed, so there’s no layout work, just your photos and words.' },
+      ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
+    ],
+  },
+  'bestie-matchbook': {
+    badge: 'Bestseller',
+    tags: ['3 designs', 'No design skills', 'Print any size'],
+    offerDetail: 'Cute Pink, Vintage & Coastal Blue',
+    highlightReview: 0,
+    reviews: bestieMatchbookReviews,
+    faqs: [
+      { q: 'What’s included?', a: '3 bestie matchbook poster designs (Cute Pink, Vintage and Coastal Blue), your editable Canva links, a video tutorial and 5 print sizes for each design, from 8×10 to 20×30.' },
+      { q: 'Can I make all three designs?', a: 'Yes. You get all 3 designs, so you can make one for each bestie or pick your favorite.' },
+      { q: 'How long does it take to make?', a: 'Most people finish in under an hour. The design is already done, so you just add your photos, names and details.' },
       ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
     ],
   },

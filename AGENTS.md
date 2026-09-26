@@ -74,8 +74,8 @@ Products (IDs are stable; prices live in Shopify):
 | couple-photo-book | couple-photo-book-custom-printable-memory-book | 11175336738983 | 51331316023463 | Active, $11.99 |
 | couple-newspaper | couple-newspaper-custom-printable-newspaper-print | 11175336771751 | 51331316056231 | **Draft** (owner will finish and activate) |
 | couples-gift-bundle | couple-gift-bundle-4-in-1-romantic-digital-gift-set | 11175336804519 | 51331316088999 | Active, $24.99, compare-at $47.96 (4 × $11.99) |
-| bestie-matchbook | best-friend-matchbook-poster-custom-birthday-gift | 11187615006887 | 51395163390119 | Draft |
-| birthday-photo-book | best-friend-photo-book-custom-birthday-keepsake | 11187614810279 | 51395162374311 | Draft |
+| bestie-matchbook | best-friend-matchbook-poster-custom-birthday-gift | 11187615006887 | 51395163390119 | Active, $11.99, compare-at $29.98 (one product, 3 designs) |
+| birthday-photo-book | best-friend-photo-book-custom-birthday-keepsake | 11187614810279 | 51395162374311 | Active, $11.99, compare-at $29.98 |
 | all-access (planned) | `passion-flow-studio-all-access` | not created yet | | Planned |
 
 Matchbook and bundle media (14 or 15 images plus a video each) were imported
@@ -327,6 +327,20 @@ Best Friend Birthday Photo Book (2026-09-25):
 - Etsy image #11 (7287883327-style testimonial graphic: Emily R., Tiana A.,
   Sophie L., Jenna M.) was not imported; ask the owner.
 - No bundle yet: there's no best-friend bundle in Shopify.
+
+Bestie Matchbook Poster (2026-09-25):
+- One product with all 3 designs (Cute Pink, Vintage, Coastal Blue). On
+  Etsy these are separate listings; Cute Pink is the bestseller.
+- Shopify: ACTIVE. 20 media items: the pink bestseller image first, then the
+  pink listing's video (staged upload), then the 3-in-1 overview, then the
+  rest of the photos from Etsy listing 4565214970. Title "Bestie Matchbook
+  Poster: Editable Canva Template", new description (hook "Want a bestie
+  birthday gift / *that actually feels personal?*"), SEO, compare-at $29.98.
+- Reviews: `bestieMatchbookReviews` holds the pink listing's real stats
+  (5.0 from 8 reviews, 5.0/5.0/100%), all 8 reviews, with the note
+  "Reviews of the Cute Pink design".
+- Next: create the Best Friend Birthday Bundle (Etsy 4474049269) and set
+  `bundle` on bestie-matchbook and birthday-photo-book.
 
 ## 9. Next steps (in order)
 
