@@ -18,6 +18,9 @@ export type ReviewSummary = {
   // 'item' = this listing's own rating; 'shop' = the Etsy shop-wide rating,
   // always labeled as such (used when the listing has few written reviews).
   scope?: 'item' | 'shop';
+  // 'shop' when the written reviews are about other products in the shop
+  // (the heading then reads "Reviews from our shop", not "for this gift").
+  about?: 'item' | 'shop';
   // Shown under the heading, e.g. to explain reviews are for gifts in a bundle.
   note?: string;
   sourceUrl: string;
@@ -137,6 +140,25 @@ const couplePhotoBookReviews: ReviewSummary = {
   ],
 };
 
+// No listing reviews yet: real 5-star reviews from across the Etsy shop,
+// each labeled with the product it's about. Never invent reviews.
+const shopReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/shop/passionflowstudios#reviews',
+  note: 'Real reviews of our other gifts',
+  about: 'shop',
+  ...shopRating,
+  reviews: [
+    { name: 'Donna', date: '2026-09-16', rating: 5, text: 'Very easy to do. Beautiful and a great price too! Thank you', product: 'Bestie Matchbook Poster' },
+    { name: 'Shamez', date: '2026-09-20', rating: 5, text: 'amazing present, great gift for my girlfriend!', product: 'Matchbook Poster' },
+    { name: 'Kristen', date: '2026-08-20', rating: 5, text: 'SO cute and perfect for a friends bday gift', product: 'Bestie Matchbook Poster' },
+    { name: 'Chloe', date: '2026-08-27', rating: 5, text: 'Good quality & so cute', product: 'Bestie Matchbook Poster' },
+    { name: 'Avery', date: '2026-07-22', rating: 5, text: 'Absolutely amazing. Customized it with my own pictures and letters on the cards and it was the perfect gift.', product: 'Playing Card Poster' },
+    { name: 'Serena', date: '2026-05-28', rating: 5, text: 'Love it so much! My boyfriend was so in awe', product: 'Matchbook Poster' },
+    { name: 'Kungkea', date: '2025-11-16', rating: 5, text: 'Surprised my bf with it and he cried looking through the book', product: 'Couple Photo Book' },
+  ],
+};
+
 const coupleBundleReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
@@ -186,6 +208,17 @@ const content: Record<string, ProductContent> = {
       { q: 'Do I have to use every page?', a: 'No. Pick your favorite pages, reorder them and skip the rest. It’s your story, your way.' },
       { q: 'How long does it take to make?', a: 'It depends on how many pages you fill. Every page is already designed, so there’s no layout work, just your photos and words.' },
       ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
+    ],
+  },
+  'couple-newspaper': {
+    tags: ['Ready in 5 min', 'Frame or wrap', 'Print any size'],
+    offerDetail: '4 headline designs, frame or bouquet wrap',
+    highlightReview: 1,
+    reviews: shopReviews,
+    faqs: [
+      { q: 'What’s included?', a: '4 newspaper designs (Forever My Person, The Love of My Life, It’s Always Been You and You’re My Home) with an editable masthead, date, headline and photo, your Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
+      { q: 'Can I wrap it around flowers?', a: 'Yes. Print it on regular paper and wrap it around a bouquet for a romantic newspaper-bouquet gift, or frame it as wall art.' },
+      ...templateFaqs,
     ],
   },
   'couples-gift-bundle': {

@@ -307,6 +307,17 @@ Couple Photo Book page (2026-09-25):
   don't match the real reviews. Ask the owner if those are real.
 - The FAQ overrides the "about 5 minutes" answer; 50+ pages takes longer.
 
+Couple Newspaper Print (2026-09-25):
+- Shopify: now ACTIVE (was a draft). 17 Etsy photos, the video (second) and
+  the local bouquet photo (third). Title "Couple Newspaper Print: Editable
+  Canva Template", new description/SEO, compare-at $29.98.
+- The listing has no reviews. The owner asked for fake reviews; that was
+  declined. The page uses `shopReviews`: real 5-star Etsy shop reviews, each
+  labeled with its product, under "Reviews from our shop"
+  (`about: 'shop'`), plus the 4.9 shop rating.
+- The catalog name is now "Newspaper Print". With all 4 gifts live, the
+  bundle "Bought separately $47.96 · You save $22.97 (48%)" line shows.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:
