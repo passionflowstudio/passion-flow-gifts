@@ -318,6 +318,16 @@ Couple Newspaper Print (2026-09-25):
 - The catalog name is now "Newspaper Print". With all 4 gifts live, the
   bundle "Bought separately $47.96 · You save $22.97 (48%)" line shows.
 
+Best Friend Birthday Photo Book (2026-09-25):
+- Shopify: now ACTIVE. 12 photos plus the video, title "Best Friend
+  Birthday Photo Book: Editable Canva Template", new description/SEO,
+  compare-at $29.98.
+- Honest stats: 4.8 average, 10 reviews, item quality 4.9, customer service
+  4.9, 100% recommend. 6 selected reviews.
+- Etsy image #11 (7287883327-style testimonial graphic: Emily R., Tiana A.,
+  Sophie L., Jenna M.) was not imported; ask the owner.
+- No bundle yet: there's no best-friend bundle in Shopify.
+
 ## 9. Next steps (in order)
 
 1. DONE: the sections below are wired in (kept for reference). Remaining:

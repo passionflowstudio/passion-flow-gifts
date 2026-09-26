@@ -159,6 +159,28 @@ const shopReviews: ReviewSummary = {
   ],
 };
 
+// Etsy listing stats: 4.8 average, 10 reviews. Selected reviews shown
+// (omitted: a download complaint, an untranslated/unclear one, an empty
+// one, and "Joshua" pending owner confirmation).
+const birthdayPhotoBookReviews: ReviewSummary = {
+  source: 'Etsy',
+  sourceUrl: 'https://www.etsy.com/listing/4355300090/bestfriend-photo-book-canva-photobook',
+  note: 'Selected reviews',
+  average: 4.8,
+  count: 10,
+  itemQuality: 4.9,
+  customerService: 4.9,
+  recommendPercent: 100,
+  reviews: [
+    { name: 'Clare', date: '2026-06-07', rating: 5, text: 'This was the perfect birthday gift for my best friend! Super cute and easy to use. There are a ton of options to customize and it was also easy to print.' },
+    { name: 'katelynn', date: '2026-01-11', rating: 5, text: '10/10 so cute def reccomend' },
+    { name: 'Katelyn', date: '2025-12-16', rating: 5, text: 'Very cute, friend loved it' },
+    { name: 'Lindsay', date: '2025-10-14', rating: 5, text: 'It matched the description perfectly! Super cute and my friend loved it', response: 'Yayy I’m glad your friend loved it!🩷🥺' },
+    { name: 'Tia', date: '2025-10-06', rating: 5, text: 'great gift for friend for xmas' },
+    { name: 'HoopsHaven', date: '2025-09-06', rating: 5, text: 'bought this for my best friend of 10 years. she loved it.' },
+  ],
+};
+
 const coupleBundleReviews: ReviewSummary = {
   source: 'Etsy',
   sourceUrl: 'https://www.etsy.com/listing/4486111419/couple-gift-bundle-4-in-1-romantic-gift',
@@ -219,6 +241,20 @@ const content: Record<string, ProductContent> = {
       { q: 'What’s included?', a: '4 newspaper designs (Forever My Person, The Love of My Life, It’s Always Been You and You’re My Home) with an editable masthead, date, headline and photo, your Canva link, a video tutorial and 5 print sizes from 8×10 to 20×30.' },
       { q: 'Can I wrap it around flowers?', a: 'Yes. Print it on regular paper and wrap it around a bouquet for a romantic newspaper-bouquet gift, or frame it as wall art.' },
       ...templateFaqs,
+    ],
+  },
+  'birthday-photo-book': {
+    badge: 'Bestseller',
+    tags: ['40+ pages', 'No design skills', 'Print or share'],
+    offerDetail: '40+ ready-made page designs',
+    highlightReview: 0,
+    reviews: birthdayPhotoBookReviews,
+    faqs: [
+      { q: 'What’s included?', a: 'One editable best friend birthday photo book template with 40+ page designs (meet the birthday girl, a toast to you, a bestie dictionary, our year in review, our bucket list, my wishes to you and more), your Canva link, a video tutorial and square sizes: 6×6, 8×8 and 12×12.' },
+      { q: 'Can I print it as a real book?', a: 'Yes. Order it as a printed photo book through Canva Print, or download a PDF and take it to any local print shop. You can also share it digitally.' },
+      { q: 'Do I have to use every page?', a: 'No. Pick your favorite pages, reorder them and skip the rest.' },
+      { q: 'How long does it take to make?', a: 'It depends on how many pages you fill. Every page is already designed, so there’s no layout work, just your photos and words.' },
+      ...templateFaqs.filter(faq => faq.q !== 'How long does it take to make?'),
     ],
   },
   'couples-gift-bundle': {
