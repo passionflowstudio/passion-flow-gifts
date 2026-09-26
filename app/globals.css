@@ -604,7 +604,7 @@ html:has(.cart-drawer[open]){overflow:hidden}
 
 /* ---------- Offer picker (single gift vs bundle) ---------- */
 .product-tags{display:flex;flex-wrap:wrap;gap:6px;margin:-8px 0 20px;padding:0;list-style:none}
-.product-tags li{padding:6px 10px;border:1px solid rgba(115,52,59,.28);border-radius:4px;color:var(--deep-wine);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.product-tags li{padding:6px 11px;border:0;border-radius:999px;background:var(--brand-gradient);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 10px rgba(115,52,59,.18)}
 .offer-picker{display:grid;gap:14px}
 .offer-card{position:relative;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;padding:14px 14px 14px 14px;border:1.5px solid rgba(115,52,59,.18);border-radius:14px;background:var(--paper);color:var(--espresso);text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s,background .2s}
 .offer-card:hover{border-color:rgba(142,63,70,.5)}
@@ -631,6 +631,9 @@ html:has(.cart-drawer[open]){overflow:hidden}
 .review-highlight figcaption{color:var(--muted-foreground);font-size:12px}
 
 @media(max-width:680px){
+/* Benefit tags: one row on phones */
+.product-tags{flex-wrap:nowrap;gap:5px}
+.product-tags li{padding:5px 8px;font-size:min(10px,2.55vw);letter-spacing:.05em;white-space:nowrap}
 /* Price moves under the name so the full name fits on one line. */
 .offer-card{grid-template-columns:auto auto minmax(0,1fr);gap:10px;padding:12px}
 .offer-label{white-space:nowrap;font-size:min(14px,3.75vw)}
